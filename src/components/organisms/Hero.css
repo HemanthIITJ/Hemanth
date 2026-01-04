@@ -1,0 +1,394 @@
+/*
+ * HERO SECTION STYLES
+ * 
+ * Visual Hierarchy:
+ * 1. Canvas particle background (z-index: 0)
+ * 2. Gradient overlay (z-index: 1)
+ * 3. Content (z-index: 2)
+ * 
+ * Animations:
+ * - Gradient rotation (8s infinite)
+ * - Title fade-in with scale
+ * - Staggered element entrance
+ */
+
+.section--hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--gradient-hero);
+}
+
+/* === CANVAS BACKGROUND === */
+.hero__canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+/* === GRADIENT OVERLAY === */
+.hero__gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    background: radial-gradient(ellipse at 50% 50%,
+            transparent 0%,
+            hsla(var(--hue-primary), 40%, 10%, 0.4) 100%);
+
+    pointer-events: none;
+}
+
+/* === CONTENT CONTAINER === */
+.hero__container {
+    position: relative;
+    z-index: 2;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px;
+    /* Account for fixed navigation height */
+}
+
+.hero__content {
+    max-width: 900px;
+    text-align: center;
+
+    animation: hero-fade-in 1s var(--ease-out-cubic) forwards;
+}
+
+@keyframes hero-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === TITLE: Refined visible gradient === */
+.hero__title {
+    font-family: var(--font-family-display);
+    font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
+    font-weight: var(--font-weight-extrabold);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--space-6);
+
+    /* Visible gold gradient */
+    background: linear-gradient(135deg,
+            hsl(45, 88%, 65%) 0%,
+            hsl(42, 85%, 58%) 35%,
+            hsl(38, 82%, 52%) 70%,
+            hsl(35, 80%, 48%) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Subtle glow for depth */
+    filter: drop-shadow(0 2px 6px rgba(255, 200, 50, 0.3));
+
+    animation: title-entrance 1.2s var(--ease-out-cubic) 0.2s backwards;
+}
+
+@keyframes title-entrance {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@media (max-width: 767px) {
+    .hero__title {
+        font-size: var(--font-size-4xl);
+    }
+}
+
+/* === SUBTITLE: Clear readable accent === */
+.hero__subtitle {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-normal);
+    font-style: italic;
+    color: rgba(235, 235, 245, 0.9);
+    margin-bottom: var(--space-8);
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+
+    animation: subtitle-entrance 1s var(--ease-out-cubic) 0.4s backwards;
+}
+
+@keyframes subtitle-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 767px) {
+    .hero__subtitle {
+        font-size: var(--font-size-lg);
+    }
+}
+
+/* === DESCRIPTION: Clean readability === */
+.hero__description {
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    font-weight: var(--font-weight-normal);
+    color: rgba(220, 220, 230, 0.92);
+    margin-bottom: var(--space-10);
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+    animation: description-entrance 1s var(--ease-out-cubic) 0.6s backwards;
+}
+
+.hero__description .highlight {
+    color: hsl(45, 85%, 62%);
+    font-weight: var(--font-weight-medium);
+    position: relative;
+}
+
+@keyframes description-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 767px) {
+    .hero__description {
+        font-size: var(--font-size-base);
+    }
+}
+
+/* === CTA BUTTONS === */
+.hero__cta {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    margin-bottom: var(--space-6);
+
+    animation: cta-entrance 1s var(--ease-out-cubic) 0.8s backwards;
+}
+
+@keyframes cta-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 640px) {
+    .hero__cta {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* === STATS BOX: Premium glassmorphism with gold accents === */
+.hero__stats.glass {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-7) var(--space-6);
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    margin-top: var(--space-2);
+
+    /* Premium glassmorphism */
+    background: linear-gradient(135deg,
+            hsla(220, 25%, 12%, 0.92) 0%,
+            hsla(220, 30%, 8%, 0.95) 100%);
+    border: 1.5px solid hsla(45, 85%, 55%, 0.35);
+    border-radius: var(--radius-2xl);
+    position: relative;
+
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+
+    /* Premium layered shadows */
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        var(--shadow-glow-gold),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+
+    animation: stats-entrance 1s var(--ease-out-cubic) 1s backwards;
+}
+
+.hero__stats {
+    /* Fallback / Reset if class matches poorly, though .glass selector is stronger */
+    display: flex;
+    flex-direction: row;
+}
+
+/* Gold gradient border effect */
+.hero__stats.glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg,
+            hsla(45, 80%, 55%, 0.4) 0%,
+            hsla(200, 70%, 50%, 0.2) 50%,
+            hsla(45, 80%, 55%, 0.4) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+/* Premium Separators */
+.stat:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60%;
+    background: linear-gradient(to bottom, transparent, hsla(45, 85%, 55%, 0.5), transparent);
+}
+
+.stat {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+/* Refined gold diamond separator */
+.stat:not(:last-child)::before {
+    content: '◆';
+    position: absolute;
+    right: calc(-1 * var(--space-6) / 2 - 4px);
+    top: 50%;
+    transform: translateY(-50%) scale(0.7);
+    color: hsl(45, 90%, 62%);
+    z-index: 2;
+    text-shadow:
+        0 0 12px hsla(45, 90%, 62%, 0.8),
+        0 0 24px hsla(45, 90%, 62%, 0.4);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes stats-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .hero__stats.glass {
+        gap: var(--space-2);
+        padding: var(--space-8) var(--space-2);
+    }
+
+    .stat__value {
+        font-size: var(--font-size-2xl);
+    }
+
+    .stat:not(:last-child)::after,
+    .stat:not(:last-child)::before {
+        display: none;
+    }
+}
+
+/* === INDIVIDUAL STAT === */
+.stat {
+    text-align: center;
+}
+
+.stat__value {
+    font-family: var(--font-family-heading);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-extrabold);
+    background: linear-gradient(135deg, hsl(45, 85%, 60%) 0%, hsl(35, 80%, 55%) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: var(--space-2);
+    filter: drop-shadow(0 2px 4px hsla(45, 80%, 50%, 0.3));
+}
+
+.stat__label {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-wide);
+    font-weight: var(--font-weight-medium);
+}
+
+@media (max-width: 767px) {
+    .stat__value {
+        font-size: var(--font-size-2xl);
+    }
+
+    .stat__label {
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* === SCROLL INDICATOR === */
+.scroll-indicator {
+    z-index: 3;
+    opacity: 0;
+    animation: scroll-fade-in 1s var(--ease-out-cubic) 1.5s forwards;
+}
+
+@keyframes scroll-fade-in {
+    to {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,293 @@
+/*
+ * CSS DESIGN TOKENS - PREMIUM PORTFOLIO DESIGN SYSTEM
+ * 
+ * COLOR THEORY:
+ * - HSL color space for algorithmic manipulation
+ * - Complementary hue spacing (180°) for accent colors
+ * - Saturation/lightness scales for consistency
+ * - Alpha channel for glassmorphism effects
+ * 
+ * TYPOGRAPHY:
+ * - Modular scale: 1.250 (Major Third)
+ * - Base: 16px, Scale: [12.8px, 16px, 20px, 25px, 31px, 39px, 49px]
+ * - Line height: 1.5 for body, 1.2 for headings
+ * 
+ * SPACING:
+ * - 8px grid system for vertical rhythm
+ * - Powers of 2 for horizontal spacing
+ * - Consistent padding/margin ratios
+ * 
+ * ANIMATION:
+ * - Easing functions: cubic-bezier curves
+ * - Duration: 150ms (micro), 300ms (standard), 500ms (emphasized)
+ * - GPU-accelerated properties only (transform, opacity)
+ */
+
+:root {
+  /* === COLOR SYSTEM: HSL-based for algorithmic generation === */
+
+  /* Primary palette: Deep purple-blue */
+  --hue-primary: 240;
+  --saturation-primary: 70%;
+  --color-primary-50: hsl(var(--hue-primary), var(--saturation-primary), 98%);
+  --color-primary-100: hsl(var(--hue-primary), var(--saturation-primary), 95%);
+  --color-primary-200: hsl(var(--hue-primary), var(--saturation-primary), 85%);
+  --color-primary-300: hsl(var(--hue-primary), var(--saturation-primary), 70%);
+  --color-primary-400: hsl(var(--hue-primary), var(--saturation-primary), 60%);
+  --color-primary-500: hsl(var(--hue-primary), var(--saturation-primary), 50%);
+  --color-primary-600: hsl(var(--hue-primary), var(--saturation-primary), 40%);
+  --color-primary-700: hsl(var(--hue-primary), var(--saturation-primary), 30%);
+  --color-primary-800: hsl(var(--hue-primary), var(--saturation-primary), 20%);
+  --color-primary-900: hsl(var(--hue-primary), var(--saturation-primary), 10%);
+
+  /* Accent palette: Complementary cyan (hue + 180°) */
+  --hue-accent: 180;
+  --saturation-accent: 80%;
+  --color-accent-50: hsl(var(--hue-accent), var(--saturation-accent), 98%);
+  --color-accent-100: hsl(var(--hue-accent), var(--saturation-accent), 95%);
+  --color-accent-200: hsl(var(--hue-accent), var(--saturation-accent), 85%);
+  --color-accent-300: hsl(var(--hue-accent), var(--saturation-accent), 70%);
+  --color-accent-400: hsl(var(--hue-accent), var(--saturation-accent), 60%);
+  --color-accent-500: hsl(var(--hue-accent), var(--saturation-accent), 50%);
+  --color-accent-600: hsl(var(--hue-accent), var(--saturation-accent), 40%);
+  --color-accent-700: hsl(var(--hue-accent), var(--saturation-accent), 30%);
+
+  /* Neutral palette: Warm desaturated for depth and readability */
+  --color-neutral-50: hsl(220, 18%, 98%);
+  --color-neutral-100: hsl(220, 16%, 96%);
+  --color-neutral-200: hsl(220, 14%, 92%);
+  --color-neutral-300: hsl(220, 12%, 85%);
+  --color-neutral-400: hsl(220, 10%, 65%);
+  --color-neutral-500: hsl(220, 9%, 50%);
+  --color-neutral-600: hsl(220, 10%, 38%);
+  --color-neutral-700: hsl(220, 14%, 25%);
+  --color-neutral-800: hsl(220, 18%, 16%);
+  --color-neutral-900: hsl(220, 22%, 9%);
+  --color-neutral-950: hsl(220, 26%, 5%);
+
+  /* Semantic colors */
+  --color-success: hsl(142, 70%, 50%);
+  --color-warning: hsl(38, 90%, 50%);
+  --color-error: hsl(0, 70%, 50%);
+  --color-info: hsl(200, 70%, 50%);
+
+  /* === THEME: Dark mode default === */
+  --color-bg-primary: var(--color-neutral-950);
+  --color-bg-secondary: var(--color-neutral-900);
+  --color-bg-tertiary: var(--color-neutral-800);
+
+  --color-text-primary: var(--color-neutral-50);
+  --color-text-secondary: var(--color-neutral-300);
+  --color-text-tertiary: var(--color-neutral-400);
+
+  --color-border: hsla(220, 20%, 30%, 0.3);
+  --color-border-hover: hsla(220, 30%, 50%, 0.5);
+
+  /* === GLASSMORPHISM: Premium layered glass with gold accents === */
+  --glass-bg: hsla(220, 25%, 12%, 0.85);
+  --glass-bg-hover: hsla(220, 28%, 15%, 0.92);
+  --glass-border: hsla(45, 85%, 55%, 0.25);
+  --glass-border-hover: hsla(45, 90%, 60%, 0.4);
+  --glass-blur: 16px;
+  --glass-saturation: 180%;
+
+  /* === TYPOGRAPHY: Premium font system with OpenType features === */
+
+  /* Font families: Classical serif + Modern sans-serif pairing */
+  --font-family-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-family-heading: 'Playfair Display', Georgia, serif;
+  --font-family-accent: 'Cormorant Garamond', Garamond, Georgia, serif;
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-mono: 'Fira Code', 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+
+  /* Fluid typography: Perfect Fourth scale (1.333) with responsive scaling */
+  --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8rem);
+  /* 12-12.8px */
+  --font-size-sm: clamp(0.813rem, 0.775rem + 0.3vw, 0.875rem);
+  /* 13-14px */
+  --font-size-base: clamp(0.938rem, 0.875rem + 0.35vw, 1rem);
+  /* 15-16px */
+  --font-size-lg: clamp(1.063rem, 0.975rem + 0.45vw, 1.125rem);
+  /* 17-18px */
+  --font-size-xl: clamp(1.188rem, 1.075rem + 0.6vw, 1.313rem);
+  /* 19-21px */
+  --font-size-2xl: clamp(1.438rem, 1.25rem + 0.95vw, 1.75rem);
+  /* 23-28px */
+  --font-size-3xl: clamp(1.875rem, 1.6rem + 1.4vw, 2.375rem);
+  /* 30-38px */
+  --font-size-4xl: clamp(2.375rem, 2rem + 1.9vw, 3.125rem);
+  /* 38-50px */
+  --font-size-5xl: clamp(3rem, 2.5rem + 2.5vw, 4.25rem);
+  /* 48-68px */
+  --font-size-6xl: clamp(3.75rem, 3rem + 3.75vw, 5.625rem);
+  /* 60-90px */
+  --font-size-7xl: clamp(4.5rem, 3.5rem + 5vw, 7.5rem);
+  /* 72-120px */
+
+  /* Font weights: Extended range for premium control */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+
+  /* Line heights: Optimized for readability */
+  --line-height-none: 1;
+  --line-height-tight: 1.1;
+  --line-height-snug: 1.35;
+  --line-height-normal: 1.6;
+  /* Body text: optimal readability */
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+
+  /* Letter spacing: Optical adjustments per size */
+  --letter-spacing-tighter: -0.04em;
+  /* Large display text */
+  --letter-spacing-tight: -0.02em;
+  /* Headings */
+  --letter-spacing-normal: 0;
+  /* Body text */
+  --letter-spacing-wide: 0.025em;
+  /* Small caps, labels */
+  --letter-spacing-wider: 0.05em;
+  /* Buttons, badges */
+  --letter-spacing-widest: 0.1em;
+  /* Extreme tracking */
+
+  /* === SPACING: 8px grid system === */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  /* 4px */
+  --space-2: 0.5rem;
+  /* 8px */
+  --space-3: 0.75rem;
+  /* 12px */
+  --space-4: 1rem;
+  /* 16px */
+  --space-5: 1.25rem;
+  /* 20px */
+  --space-6: 1.5rem;
+  /* 24px */
+  --space-8: 2rem;
+  /* 32px */
+  --space-10: 2.5rem;
+  /* 40px */
+  --space-12: 3rem;
+  /* 48px */
+  --space-16: 4rem;
+  /* 64px */
+  --space-20: 5rem;
+  /* 80px */
+  --space-24: 6rem;
+  /* 96px */
+  --space-32: 8rem;
+  /* 128px */
+
+  /* === BORDER RADIUS: Consistent curves === */
+  --radius-sm: 0.25rem;
+  /* 4px */
+  --radius-md: 0.5rem;
+  /* 8px */
+  --radius-lg: 0.75rem;
+  /* 12px */
+  --radius-xl: 1rem;
+  /* 16px */
+  --radius-2xl: 1.5rem;
+  /* 24px */
+  --radius-full: 9999px;
+
+  /* === SHADOWS: Premium elevation system with ambient lighting === */
+  --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 1px 2px -1px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.15), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 20px -5px rgba(0, 0, 0, 0.2), 0 4px 8px -4px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 20px 30px -8px rgba(0, 0, 0, 0.25), 0 8px 16px -8px rgba(0, 0, 0, 0.18);
+  --shadow-2xl: 0 30px 60px -15px rgba(0, 0, 0, 0.35), 0 12px 24px -10px rgba(0, 0, 0, 0.2);
+
+  /* Premium glow effects: Subtle colored halos */
+  --shadow-glow-gold: 0 0 32px hsla(45, 85%, 60%, 0.25), 0 0 64px hsla(45, 85%, 60%, 0.12);
+  --shadow-glow-gold-intense: 0 0 48px hsla(45, 85%, 60%, 0.4), 0 0 96px hsla(45, 85%, 60%, 0.2);
+  --shadow-glow-primary: 0 0 40px hsla(var(--hue-primary), 80%, 60%, 0.3);
+  --shadow-glow-accent: 0 0 40px hsla(var(--hue-accent), 80%, 60%, 0.3);
+
+  /* === ANIMATION: Easing and duration === */
+  --duration-instant: 100ms;
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+
+  /* Easing functions: Natural motion curves */
+  --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-spring: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* === Z-INDEX: Stacking context === */
+  --z-base: 0;
+  --z-dropdown: 1000;
+  --z-sticky: 1100;
+  --z-fixed: 1200;
+  --z-modal-backdrop: 1300;
+  --z-modal: 1400;
+  --z-popover: 1500;
+  --z-tooltip: 1600;
+
+  /* === BREAKPOINTS: Responsive design === */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* === LAYOUT: Container widths === */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+
+  /* === GRADIENTS: Premium color transitions === */
+  --gradient-primary: linear-gradient(135deg,
+      var(--color-primary-600) 0%,
+      var(--color-primary-800) 100%);
+
+  --gradient-accent: linear-gradient(135deg,
+      var(--color-accent-500) 0%,
+      var(--color-accent-700) 100%);
+
+  --gradient-hero: linear-gradient(135deg,
+      hsl(var(--hue-primary), 60%, 20%) 0%,
+      hsl(var(--hue-primary), 50%, 10%) 50%,
+      hsl(var(--hue-accent), 40%, 15%) 100%);
+
+  --gradient-glass: linear-gradient(135deg,
+      hsla(var(--hue-primary), 30%, 15%, 0.8) 0%,
+      hsla(var(--hue-primary), 20%, 10%, 0.6) 100%);
+}
+
+/* === LIGHT MODE OVERRIDE (optional) === */
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg-primary: var(--color-neutral-50);
+    --color-bg-secondary: var(--color-neutral-100);
+    --color-bg-tertiary: var(--color-neutral-200);
+
+    --color-text-primary: var(--color-neutral-900);
+    --color-text-secondary: var(--color-neutral-700);
+    --color-text-tertiary: var(--color-neutral-600);
+
+    --color-border: hsla(220, 20%, 70%, 0.3);
+    --color-border-hover: hsla(220, 30%, 50%, 0.5);
+
+    --glass-bg: hsla(0, 0%, 100%, 0.7);
+    --glass-bg-hover: hsla(0, 0%, 100%, 0.85);
+    --glass-border: hsla(220, 20%, 80%, 0.5);
+    --glass-border-hover: hsla(220, 30%, 70%, 0.7);
+  }
+}

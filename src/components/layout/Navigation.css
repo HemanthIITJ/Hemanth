@@ -1,0 +1,181 @@
+/* NAVIGATION STYLES - Premium with Better Contrast */
+
+.navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-fixed);
+
+    /* Always have slight blur for readability */
+    background: hsla(220, 30%, 8%, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition: all var(--duration-normal) var(--ease-out-cubic);
+}
+
+.navigation--scrolled {
+    background: hsla(220, 30%, 8%, 0.85);
+    border-bottom: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+    box-shadow: var(--shadow-lg);
+}
+
+.navigation__container {
+    max-width: var(--container-2xl);
+    margin: 0 auto;
+    padding: var(--space-4) var(--space-6);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-8);
+}
+
+.navigation__brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+/* Premium logo with luxury serif font */
+.navigation__logo {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: var(--font-family-display);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-black);
+    letter-spacing: -0.03em;
+
+    background: linear-gradient(135deg, hsl(45, 90%, 60%) 0%, hsl(35, 85%, 52%) 100%);
+    color: hsl(220, 30%, 8%);
+    border-radius: var(--radius-xl);
+
+    /* Premium gold glow */
+    box-shadow:
+        0 4px 16px hsla(45, 85%, 55%, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+
+    transition: all var(--duration-normal) var(--ease-out-cubic);
+}
+
+.navigation__logo:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow:
+        var(--shadow-glow-gold),
+        0 6px 28px hsla(45, 85%, 55%, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* Brand name with premium serif */
+.navigation__name {
+    font-family: var(--font-family-accent);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    font-style: italic;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: var(--letter-spacing-normal);
+    margin-top: 2px;
+}
+
+.navigation__menu {
+    display: flex;
+    gap: var(--space-1);
+    list-style: none;
+}
+
+.navigation__link {
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+    transition: all var(--duration-fast) var(--ease-out-cubic);
+    position: relative;
+}
+
+.navigation__link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, hsl(45, 85%, 55%), hsl(35, 80%, 50%));
+    transform: translateX(-50%);
+    transition: width var(--duration-fast) var(--ease-out-cubic);
+    border-radius: var(--radius-full);
+}
+
+.navigation__link:hover {
+    color: hsl(45, 90%, 65%);
+    background: hsla(45, 50%, 50%, 0.1);
+}
+
+.navigation__link:hover::after {
+    width: 60%;
+}
+
+.navigation__link--active {
+    color: hsl(45, 90%, 60%);
+}
+
+.navigation__link--active::after {
+    width: 70%;
+}
+
+@media (max-width: 1024px) {
+    .navigation__name {
+        font-size: var(--font-size-base);
+    }
+}
+
+@media (max-width: 767px) {
+    .navigation__menu {
+        gap: 0;
+    }
+
+    .navigation__link {
+        padding: var(--space-2);
+        font-size: var(--font-size-sm);
+    }
+}
+
+/* Light Theme Navigation Overrides */
+.light-theme .navigation {
+    background: hsla(220, 20%, 98%, 0.6);
+}
+
+.light-theme .navigation--scrolled {
+    background: hsla(220, 20%, 100%, 0.92);
+}
+
+.light-theme .navigation__name {
+    color: var(--color-text-primary);
+    text-shadow: none;
+}
+
+.light-theme .navigation__link {
+    color: var(--color-text-secondary);
+    text-shadow: none;
+}
+
+.light-theme .navigation__link:hover {
+    color: var(--color-primary-500);
+    background: hsla(220, 50%, 50%, 0.08);
+}
+
+.light-theme .navigation__link--active {
+    color: var(--color-primary-500);
+}
