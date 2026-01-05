@@ -6,10 +6,7 @@
             var(--color-bg-secondary) 100%);
 }
 
-.section__header {
-    text-align: center;
-    margin-bottom: var(--space-12);
-}
+/* .section__header handled globally */
 
 .section__title {
     font-size: var(--font-size-5xl);
@@ -20,8 +17,7 @@
 .section__subtitle {
     font-size: var(--font-size-xl);
     color: var(--color-text-secondary);
-    max-width: 700px;
-    margin: 0 auto;
+    /* max-width and margin handled globally */
 }
 
 /* TABS */
@@ -40,7 +36,7 @@
     padding: var(--space-3) var(--space-6);
     border-radius: var(--radius-lg);
     background: var(--glass-bg);
-    border: 2px solid var(--glass-border);
+    border: 1px solid var(--glass-border);
     color: var(--color-text-secondary);
     font-weight: var(--font-weight-semibold);
     transition: all var(--duration-fast) var(--ease-out-cubic);
@@ -91,8 +87,51 @@
     line-height: var(--line-height-relaxed);
 }
 
+/* Force thin borders for glass cards AND remove glow/thick pseudo-borders */
+.technical .glass {
+    border-width: 1px !important;
+    box-shadow: none !important;
+    /* Optional: reduce shadow if it looks like a border */
+}
+
+.technical .glass::before,
+.technical .glass::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Specific overrides for capability card if needed */
+.capability {
+    border: 1px solid var(--glass-border) !important;
+}
+
+.capability::before {
+    display: none !important;
+}
+
 .capability__section {
     margin-top: var(--space-6);
+    /* FORCE remove borders from inner sections */
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Explicit utility class to force removal */
+.section--no-border {
+    border: 0 !important;
+    border-width: 0 !important;
+    border-style: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    background: transparent !important;
+}
+
+.section--no-border::before,
+.section--no-border::after {
+    display: none !important;
+    content: none !important;
 }
 
 .capability__section-title {

@@ -1,37 +1,40 @@
-/* LIGHT/DARK THEME VARIABLES & PREMIUM ANIMATIONS */
+/* PREMIUM THEME SYSTEM - ANTHROPIC-INSPIRED PALETTE */
 
 /* ====================================
-   DARK THEME (Default) - Cosmic Night
+   DARK THEME (Default) - Sophisticated Black
    ==================================== */
 :root,
 .dark-theme {
-    --theme-transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --theme-transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Explicitly define backgrounds for Dark Mode to override system light preference */
-    --color-bg-primary: hsl(240, 30%, 8%);
-    --color-bg-secondary: hsl(220, 35%, 10%);
-    --color-bg-tertiary: hsl(200, 40%, 12%);
+    /* Premium Dark: Deep blacks with subtle warmth */
+    --color-bg-primary: hsl(0, 0%, 4%);
+    --color-bg-secondary: hsl(0, 0%, 6%);
+    --color-bg-tertiary: hsl(0, 0%, 8%);
 
-    --color-text-primary: hsl(0, 0%, 100%);
-    --color-text-secondary: hsl(220, 20%, 80%);
-    --color-text-tertiary: hsl(220, 15%, 60%);
+    /* Text: High contrast pure whites to soft grays */
+    --color-text-primary: hsl(0, 0%, 98%);
+    --color-text-secondary: hsl(0, 0%, 70%);
+    --color-text-tertiary: hsl(0, 0%, 50%);
 
-    /* CARD THEME VARIABLES - DARK MODE */
-    --bg-card: linear-gradient(135deg, hsla(220, 28%, 8%, 0.95) 0%, hsla(220, 32%, 6%, 0.98) 100%);
-    --bg-card-hover: linear-gradient(135deg, hsla(220, 28%, 10%, 0.95) 0%, hsla(220, 32%, 8%, 0.98) 100%);
-    --border-card: hsla(45, 85%, 55%, 0.2);
-    --border-card-hover: hsla(45, 90%, 60%, 0.35);
+    /* Card backgrounds - subtle elevation */
+    --bg-card: linear-gradient(135deg, hsla(0, 0%, 7%, 0.95) 0%, hsla(0, 0%, 5%, 0.98) 100%);
+    --bg-card-hover: linear-gradient(135deg, hsla(0, 0%, 9%, 0.95) 0%, hsla(0, 0%, 7%, 0.98) 100%);
+    --border-card: hsla(0, 0%, 20%, 0.3);
+    --border-card-hover: hsla(0, 0%, 30%, 0.5);
 
-    /* Hero gradient for dark */
+    /* Dot grid pattern for premium engineered feel - VISIBLE */
+    --dot-grid-color: hsla(0, 0%, 100%, 0.15);
+
+    /* Hero gradient - ultra-subtle */
     --hero-gradient: linear-gradient(135deg,
-            hsl(240, 30%, 8%) 0%,
-            hsl(220, 35%, 12%) 25%,
-            hsl(200, 40%, 10%) 50%,
-            hsl(240, 30%, 10%) 100%);
+            hsl(0, 0%, 4%) 0%,
+            hsl(0, 0%, 5%) 50%,
+            hsl(0, 0%, 4%) 100%);
 
-    /* Particle colors */
-    --particle-color: rgba(100, 200, 255, 0.7);
-    --particle-line: rgba(100, 200, 255, 0.15);
+    /* Particle colors - minimal for elegance */
+    --particle-color: rgba(255, 255, 255, 0.15);
+    --particle-line: rgba(255, 255, 255, 0.05);
 }
 
 /* Default/Dark Mode Gold Gradient Text */
@@ -48,64 +51,65 @@
 }
 
 /* ====================================
-   LIGHT THEME - Classic Royal Premium
+   LIGHT THEME - Anthropic-Inspired Warm Sophistication
    ==================================== */
 .light-theme {
-    /* Background Colors - Warm Cream/Off-White */
-    --color-bg-primary: hsl(40, 20%, 97%);
-    --color-bg-secondary: hsl(40, 25%, 94%);
-    --color-bg-tertiary: hsl(40, 20%, 90%);
+    /* Background: Warm cream/beige - Anthropic style */
+    --color-bg-primary: hsl(40, 25%, 97%);
+    --color-bg-secondary: hsl(40, 22%, 95%);
+    --color-bg-tertiary: hsl(40, 20%, 92%);
 
-    /* Text Colors - Deep Royal Navy */
-    --color-text-primary: hsl(220, 60%, 15%);
-    --color-text-secondary: hsl(220, 40%, 30%);
-    --color-text-tertiary: hsl(220, 30%, 50%);
+    /* Text: Deep charcoal for elegance */
+    --color-text-primary: hsl(0, 0%, 13%);
+    --color-text-secondary: hsl(0, 0%, 40%);
+    --color-text-tertiary: hsl(0, 0%, 55%);
 
-    /* CARD THEME VARIABLES - LIGHT MODE (Cream/White Cards) */
-    --bg-card: linear-gradient(135deg, hsla(40, 30%, 98%, 0.9) 0%, hsla(40, 40%, 96%, 0.95) 100%);
-    --bg-card-hover: linear-gradient(135deg, hsla(40, 30%, 100%, 0.95) 0%, hsla(40, 40%, 98%, 0.98) 100%);
-    --border-card: hsla(45, 40%, 70%, 0.4);
-    --border-card-hover: hsla(45, 60%, 60%, 0.6);
+    /* Card backgrounds - warm elevated surfaces */
+    --bg-card: linear-gradient(135deg, hsla(40, 30%, 98%, 0.9) 0%, hsla(40, 28%, 96%, 0.95) 100%);
+    --bg-card-hover: linear-gradient(135deg, hsla(0, 0%, 100%, 0.95) 0%, hsla(40, 35%, 98%, 0.98) 100%);
+    --border-card: hsla(40, 15%, 75%, 0.3);
+    --border-card-hover: hsla(40, 20%, 65%, 0.45);
 
-    /* Primary Colors - Deep Navy */
-    --color-primary-400: hsl(220, 70%, 25%);
-    --color-primary-500: hsl(220, 80%, 20%);
-    --color-primary-600: hsl(220, 90%, 15%);
+    /* Dot grid pattern - VISIBLE */
+    --dot-grid-color: hsla(0, 0%, 0%, 0.12);
 
-    /* Accent Colors - Premium Gold */
-    --color-accent-400: hsl(45, 85%, 50%);
-    --color-accent-500: hsl(45, 90%, 45%);
-    --color-accent-600: hsl(45, 95%, 40%);
+    /* Primary accent - refined gold */
+    --color-primary-400: hsl(45, 85%, 48%);
+    --color-primary-500: hsl(45, 88%, 45%);
+    --color-primary-600: hsl(45, 90%, 42%);
 
-    /* Success - Deep Emerald */
-    --color-success: hsl(150, 70%, 30%);
+    /* Accent - complementary blue */
+    --color-accent-400: hsl(210, 75%, 55%);
+    --color-accent-500: hsl(210, 80%, 50%);
+    --color-accent-600: hsl(210, 85%, 45%);
 
-    /* Glassmorphism for Light - Crystal Clear */
+    /* Success tone */
+    --color-success: hsl(150, 65%, 38%);
+
+    /* Glassmorphism - crystal clear */
     --glass-bg: hsla(40, 30%, 98%, 0.85);
-    --glass-bg-hover: hsla(40, 30%, 100%, 0.95);
-    --glass-border: hsla(45, 60%, 80%, 0.4);
+    --glass-bg-hover: hsla(0, 0%, 100%, 0.92);
+    --glass-border: hsla(40, 20%, 80%, 0.4);
 
-    /* Premium Shadows - Soft Gold/Navy Blend */
-    --shadow-sm: 0 4px 12px rgba(15, 28, 63, 0.05);
-    --shadow-md: 0 8px 24px rgba(15, 28, 63, 0.08), 0 2px 8px rgba(212, 175, 55, 0.05);
-    --shadow-lg: 0 16px 48px rgba(15, 28, 63, 0.12), 0 8px 24px rgba(212, 175, 55, 0.1);
-    --shadow-xl: 0 24px 64px rgba(15, 28, 63, 0.15), 0 12px 32px rgba(212, 175, 55, 0.15);
+    /* Premium shadows - warm subtle */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
 
-    /* Glows for light mode - Warm ambient */
-    --shadow-glow-primary: 0 0 30px hsla(220, 70%, 25%, 0.15);
-    --shadow-glow-accent: 0 0 25px hsla(45, 85%, 50%, 0.25);
+    /* Glows - warm ambient */
+    --shadow-glow-primary: 0 0 28px hsla(45, 85%, 50%, 0.15);
+    --shadow-glow-accent: 0 0 24px hsla(210, 80%, 55%, 0.15);
 
-    /* Hero gradient for light - Cream to Gold dust */
+    /* Hero gradient - warm subtle sweep */
     --hero-gradient: linear-gradient(135deg,
-            hsl(40, 20%, 97%) 0%,
-            hsl(40, 30%, 95%) 25%,
-            hsl(220, 15%, 95%) 50%,
-            hsl(40, 30%, 94%) 75%,
-            hsl(40, 20%, 92%) 100%);
+            hsl(40, 25%, 97%) 0%,
+            hsl(40, 22%, 96%) 50%,
+            hsl(40, 25%, 97%) 100%);
 
-    /* Particle colors for light mode - Navy */
-    --particle-color: rgba(15, 28, 63, 0.5);
-    --particle-line: rgba(15, 28, 63, 0.1);
+    /* Particle colors - dark for contrast */
+    --particle-color: rgba(0, 0, 0, 0.12);
+    --particle-line: rgba(0, 0, 0, 0.04);
 }
 
 /* ====================================

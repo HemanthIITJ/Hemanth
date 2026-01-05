@@ -39,7 +39,7 @@ const TechnicalDeepDive = () => {
                 const trainingCap = capability as Extract<TechnicalCapability, { category: 'training' }>;
                 return (
                     <>
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Architectures</h4>
                             <div className="capability__tags">
                                 {trainingCap.architectures.map((arch) => (
@@ -48,7 +48,7 @@ const TechnicalDeepDive = () => {
                             </div>
                         </div>
 
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Loss Functions</h4>
                             <div className="capability__tags">
                                 {trainingCap.lossFunctions.map((loss) => (
@@ -57,7 +57,7 @@ const TechnicalDeepDive = () => {
                             </div>
                         </div>
 
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Distributed Strategies</h4>
                             <div className="capability__tags">
                                 {trainingCap.distributedStrategies.map((strategy) => (
@@ -78,7 +78,7 @@ const TechnicalDeepDive = () => {
                 const inferenceCap = capability as Extract<TechnicalCapability, { category: 'inference' }>;
                 return (
                     <>
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Quantization Techniques</h4>
                             <div className="capability__tags">
                                 {inferenceCap.quantization.map((quant) => (
@@ -87,7 +87,7 @@ const TechnicalDeepDive = () => {
                             </div>
                         </div>
 
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Batching Strategies</h4>
                             <div className="capability__tags">
                                 {inferenceCap.batchingStrategies.map((batch) => (
@@ -96,7 +96,7 @@ const TechnicalDeepDive = () => {
                             </div>
                         </div>
 
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Latency Optimizations</h4>
                             <div className="capability__tags">
                                 {inferenceCap.latencyOptimizations.map((opt) => (
@@ -105,7 +105,7 @@ const TechnicalDeepDive = () => {
                             </div>
                         </div>
 
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Hardware Targets</h4>
                             <div className="capability__tags">
                                 {inferenceCap.hardwareTargets.map((hw) => (
@@ -121,7 +121,7 @@ const TechnicalDeepDive = () => {
                 const optCap = capability as Extract<TechnicalCapability, { category: 'optimization' }>;
                 return (
                     <>
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Parallelism Types</h4>
                             <div className="capability__tags">
                                 {optCap.parallelismTypes.map((type) => (
@@ -130,7 +130,7 @@ const TechnicalDeepDive = () => {
                             </div>
                         </div>
 
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Memory Optimizations</h4>
                             <div className="capability__tags">
                                 {optCap.memoryOptimizations.map((mem) => (
@@ -139,7 +139,7 @@ const TechnicalDeepDive = () => {
                             </div>
                         </div>
 
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Kernel Optimizations</h4>
                             <div className="capability__tags">
                                 {optCap.kernelOptimizations.map((kernel) => (
@@ -148,7 +148,7 @@ const TechnicalDeepDive = () => {
                             </div>
                         </div>
 
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Profiling Tools</h4>
                             <div className="capability__tags">
                                 {optCap.profilingTools.map((tool) => (
@@ -164,7 +164,7 @@ const TechnicalDeepDive = () => {
                 const agenticCap = capability as Extract<TechnicalCapability, { category: 'agentic' }>;
                 return (
                     <>
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Architecture Patterns</h4>
                             <div className="capability__tags">
                                 {agenticCap.architecturePatterns.map((pattern) => (
@@ -173,7 +173,7 @@ const TechnicalDeepDive = () => {
                             </div>
                         </div>
 
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Tool Integration</h4>
                             <div className="capability__tags">
                                 {agenticCap.toolIntegration.map((tool) => (
@@ -182,7 +182,7 @@ const TechnicalDeepDive = () => {
                             </div>
                         </div>
 
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Orchestration Frameworks</h4>
                             <div className="capability__tags">
                                 {agenticCap.orchestrationFrameworks.map((framework) => (
@@ -191,7 +191,7 @@ const TechnicalDeepDive = () => {
                             </div>
                         </div>
 
-                        <div className="capability__section">
+                        <div className="capability__section section--no-border">
                             <h4 className="capability__section-title">Safety Mechanisms</h4>
                             <div className="capability__tags">
                                 {agenticCap.safetyMechanisms.map((safety) => (
@@ -241,7 +241,7 @@ const TechnicalDeepDive = () => {
                             </div>
 
                             {/* Technologies */}
-                            <div className="capability__section">
+                            <div className="capability__section section--no-border">
                                 <h4 className="capability__section-title">Technologies</h4>
                                 <div className="capability__tags">
                                     {capability.technologies.map((tech) => (
@@ -254,7 +254,7 @@ const TechnicalDeepDive = () => {
                             {renderCapabilityDetails(capability)}
 
                             {/* Achievements */}
-                            <div className="capability__section">
+                            <div className="capability__section section--no-border">
                                 <h4 className="capability__section-title">Key Achievements</h4>
                                 <ul className="capability__achievements">
                                     {capability.achievements.map((achievement, idx) => (

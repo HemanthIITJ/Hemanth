@@ -20,7 +20,7 @@ const Contact = () => {
                         <h3 className="contact__info-title">Contact Information</h3>
 
                         <div className="contact__item">
-                            <div className="contact__item-icon">📧</div>
+                            <div className="contact__item-icon">📪</div>
                             <div className="contact__item-content">
                                 <div className="contact__item-label">Email</div>
                                 <a href={`mailto:${portfolioData.personal.email}`} className="contact__item-value">

@@ -1,51 +1,91 @@
 /*
- * GLOBAL STYLES - UTILITY CLASSES AND COMPONENT PRIMITIVES
+ * GLOBAL STYLES - PREMIUM SOTA DESIGN SYSTEM
  * 
  * Architecture:
- * - Utility-first approach for common patterns
- * - Component primitives for glassmorphism
+ * - Dot grid background for engineered premium feel
+ * - Ultra-clean typography with Inter
  * - GPU-accelerated animations
- * - Container queries for responsive components
+ * - Sophisticated micro-interactions
  */
 
 @import './reset.css';
 @import './tokens.css';
 @import './themes.css';
 
-/* === CONTAINER: Max-width responsive wrapper === */
+/* === BODY: Premium foundation avec dot grid === */
+body {
+    /* Dot grid background pattern - Cursify/DeepMind inspired */
+    background-image:
+        radial-gradient(circle, var(--dot-grid-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: 0 0;
+
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-normal);
+
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+
+    /* Premium text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+
+    /* Smooth scrolling */
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* High-DPI optimization */
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    body {
+        -webkit-font-smoothing: subpixel-antialiased;
+    }
+}
+
+/* === CONTAINER: Generous premium spacing === */
 .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: var(--space-4);
-    padding-right: var(--space-4);
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
 }
 
 @media (min-width: 640px) {
     .container {
         max-width: var(--container-sm);
-        padding-left: var(--space-6);
-        padding-right: var(--space-6);
+        padding-left: var(--space-8);
+        padding-right: var(--space-8);
     }
 }
 
 @media (min-width: 768px) {
     .container {
         max-width: var(--container-md);
+        padding-left: var(--space-10);
+        padding-right: var(--space-10);
     }
 }
 
 @media (min-width: 1024px) {
     .container {
         max-width: var(--container-lg);
-        padding-left: var(--space-8);
-        padding-right: var(--space-8);
+        padding-left: var(--space-12);
+        padding-right: var(--space-12);
     }
 }
 
 @media (min-width: 1280px) {
     .container {
         max-width: var(--container-xl);
+        padding-left: var(--space-16);
+        padding-right: var(--space-16);
     }
 }
 
@@ -55,13 +95,13 @@
     }
 }
 
-/* === SECTION: Full-viewport sections === */
+/* === SECTION: Luxury vertical spacing === */
 .section {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    padding-top: var(--space-20);
-    padding-bottom: var(--space-20);
+    padding-top: var(--space-28);
+    padding-bottom: var(--space-28);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,26 +113,54 @@
     padding-bottom: 0;
 }
 
-/* === GLASSMORPHISM: Premium card effect === */
+@media (min-width: 1024px) {
+    .section {
+        padding-top: var(--space-40);
+        padding-bottom: var(--space-40);
+    }
+}
+
+/* === GLASSMORPHISM: Ultra-premium depth === */
 .glass {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-2xl);
 
-    /* Backdrop blur for glassmorphism */
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+    /* Enhanced backdrop blur for premium glassmorphism */
+    backdrop-filter: blur(24px) saturate(var(--glass-saturation));
+    -webkit-backdrop-filter: blur(24px) saturate(var(--glass-saturation));
 
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-lg), var(--shadow-glow-subtle);
 
-    transition: all var(--duration-normal) var(--ease-out-cubic);
+    transition: all var(--duration-normal) var(--ease-premium);
 }
 
 .glass:hover {
     background: var(--glass-bg-hover);
     border-color: var(--glass-border-hover);
     transform: translateY(-4px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-2xl), var(--shadow-glow-primary);
+}
+
+/* === SECTION HEADERS: Global Alignment === */
+.section__header {
+    text-align: center;
+    margin-bottom: var(--space-16);
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.section__title {
+    margin-bottom: var(--space-4);
+    display: inline-block;
+}
+
+.section__subtitle {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* === TYPOGRAPHY UTILITIES: Premium text classes === */
@@ -258,20 +326,18 @@
     color: var(--color-text-primary);
 }
 
-/* === CARD: Premium content cards with refined elevation === */
+/* === CARD: Premium content cards with luxury spacing === */
 .card {
     position: relative;
-    background: linear-gradient(135deg,
-            var(--color-bg-secondary) 0%,
-            hsla(220, 20%, 12%, 0.95) 100%);
-    border-radius: var(--radius-xl);
-    border: 1px solid var(--color-border);
-    padding: var(--space-6);
+    background: var(--bg-card);
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--border-card);
+    padding: var(--space-10);
 
-    box-shadow: var(--shadow-md);
-    transition: all var(--duration-normal) var(--ease-out-cubic);
+    box-shadow: var(--shadow-md), var(--shadow-glow-subtle);
+    transition: all var(--duration-slow) var(--ease-premium);
 
-    /* 3D transform */
+    /* 3D transform context */
     transform-style: preserve-3d;
     perspective: 1000px;
 }
@@ -283,21 +349,28 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 2px;
     background: linear-gradient(90deg,
             transparent,
-            rgba(255, 255, 255, 0.1),
+            rgba(255, 255, 255, 0.15),
             transparent);
-    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+    opacity: 0.8;
 }
 
 .card:hover {
-    border-color: hsla(45, 85%, 55%, 0.3);
+    border-color: var(--border-card-hover);
     box-shadow:
         var(--shadow-2xl),
-        0 0 40px hsla(45, 85%, 60%, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    transform: translateY(-8px);
+        var(--shadow-glow-primary),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(-8px) scale(1.01);
+}
+
+@media (min-width: 1024px) {
+    .card {
+        padding: var(--space-12);
+    }
 }
 
 /* === BADGE: Technology tags === */
@@ -385,12 +458,12 @@
     }
 }
 
-/* === INTERSECTION OBSERVER: Fade-in animations === */
+/* === SCROLL ANIMATIONS: Premium traveling reveal effects === */
 .fade-in {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity var(--duration-slow) var(--ease-out-cubic),
-        transform var(--duration-slow) var(--ease-out-cubic);
+    transform: translateY(48px);
+    transition: opacity var(--duration-slower) var(--ease-premium),
+        transform var(--duration-slower) var(--ease-premium);
 }
 
 .fade-in.visible {
@@ -398,25 +471,68 @@
     transform: translateY(0);
 }
 
-/* Stagger animation for lists */
+/* Stagger animation for sequential reveal - enhanced timing */
 .fade-in[data-stagger="1"] {
-    transition-delay: 100ms;
+    transition-delay: 80ms;
 }
 
 .fade-in[data-stagger="2"] {
-    transition-delay: 200ms;
+    transition-delay: 160ms;
 }
 
 .fade-in[data-stagger="3"] {
-    transition-delay: 300ms;
+    transition-delay: 240ms;
 }
 
-.fade-in[data-stagger="4"] {
-    transition-delay: 400ms;
+.fade-in[dataagger="4"] {
+    transition-delay: 320ms;
 }
 
 .fade-in[data-stagger="5"] {
-    transition-delay: 500ms;
+    transition-delay: 400ms;
+}
+
+.fade-in[data-stagger="6"] {
+    transition-delay: 480ms;
+}
+
+/* Scale-in variant for cards */
+.scale-in {
+    opacity: 0;
+    transform: scale(0.95) translateY(24px);
+    transition: opacity var(--duration-slow) var(--ease-premium),
+        transform var(--duration-slow) var(--ease-premium);
+}
+
+.scale-in.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+/* Slide-in from left */
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-48px);
+    transition: opacity var(--duration-slower) var(--ease-premium),
+        transform var(--duration-slower) var(--ease-premium);
+}
+
+.slide-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Slide-in from right */
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(48px);
+    transition: opacity var(--duration-slower) var(--ease-premium),
+        transform var(--duration-slower) var(--ease-premium);
+}
+
+.slide-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 /* === UTILITY CLASSES === */

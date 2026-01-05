@@ -1,7 +1,6 @@
-/* NAVIGATION COMPONENT - Updated with Theme Toggle */
+/* NAVIGATION COMPONENT - Dark Mode Only */
 
 import { useState, useEffect } from 'react';
-import ThemeToggle from '@components/atoms/ThemeToggle';
 import './Navigation.css';
 
 const Navigation = () => {
@@ -63,8 +62,6 @@ const Navigation = () => {
                         </li>
                     ))}
                 </ul>
-
-                <ThemeToggle />
             </div>
         </nav>
     );

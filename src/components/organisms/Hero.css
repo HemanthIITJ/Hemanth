@@ -53,15 +53,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 80px;
-    /* Account for fixed navigation height */
+    padding-top: 100px;
+    padding-bottom: var(--space-20);
 }
 
 .hero__content {
-    max-width: 900px;
+    max-width: 1100px;
     text-align: center;
 
-    animation: hero-fade-in 1s var(--ease-out-cubic) forwards;
+    animation: hero-fade-in 0.8s var(--ease-premium) forwards;
 }
 
 @keyframes hero-fade-in {
@@ -76,67 +76,64 @@
     }
 }
 
-/* === TITLE: Refined visible gradient === */
+/* === TITLE: Ultra-premium massive heading === */
 .hero__title {
     font-family: var(--font-family-display);
-    font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
-    font-weight: var(--font-weight-extrabold);
-    letter-spacing: var(--letter-spacing-tight);
+    font-size: var(--font-size-7xl);
+    font-weight: 300;
+    letter-spacing: var(--letter-spacing-tighter);
     line-height: var(--line-height-tight);
-    margin-bottom: var(--space-6);
+    margin-bottom: var(--space-8);
 
-    /* Visible gold gradient */
+    /* Premium subtle gradient */
     background: linear-gradient(135deg,
-            hsl(45, 88%, 65%) 0%,
-            hsl(42, 85%, 58%) 35%,
-            hsl(38, 82%, 52%) 70%,
-            hsl(35, 80%, 48%) 100%);
+            hsl(0, 0%, 100%) 0%,
+            hsl(0, 0%, 95%) 50%,
+            hsl(0, 0%, 100%) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    /* Subtle glow for depth */
-    filter: drop-shadow(0 2px 6px rgba(255, 200, 50, 0.3));
+    /* Subtle depth */
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
 
-    animation: title-entrance 1.2s var(--ease-out-cubic) 0.2s backwards;
+    animation: title-entrance 0.9s var(--ease-premium) 0.15s backwards;
 }
 
 @keyframes title-entrance {
     from {
         opacity: 0;
-        transform: scale(0.9) translateY(20px);
+        transform: translateY(30px);
     }
 
     to {
         opacity: 1;
-        transform: scale(1) translateY(0);
+        transform: translateY(0);
     }
 }
 
 @media (max-width: 767px) {
     .hero__title {
-        font-size: var(--font-size-4xl);
+        font-size: var(--font-size-5xl);
     }
 }
 
-/* === SUBTITLE: Clear readable accent === */
+/* === SUBTITLE: Ultra-clean premium === */
 .hero__subtitle {
     font-family: var(--font-family-base);
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-normal);
-    font-style: italic;
-    color: rgba(235, 235, 245, 0.9);
-    margin-bottom: var(--space-8);
-    letter-spacing: 0.01em;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    font-size: var(--font-size-2xl);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-12);
+    letter-spacing: var(--letter-spacing-normal);
 
-    animation: subtitle-entrance 1s var(--ease-out-cubic) 0.4s backwards;
+    animation: subtitle-entrance 0.9s var(--ease-premium) 0.3s backwards;
 }
 
 @keyframes subtitle-entrance {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(24px);
     }
 
     to {
@@ -147,29 +144,29 @@
 
 @media (max-width: 767px) {
     .hero__subtitle {
-        font-size: var(--font-size-lg);
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--space-10);
     }
 }
 
-/* === DESCRIPTION: Clean readability === */
+/* === DESCRIPTION: Premium readability === */
 .hero__description {
     font-family: var(--font-family-base);
-    font-size: var(--font-size-base);
-    line-height: 1.7;
-    font-weight: var(--font-weight-normal);
-    color: rgba(220, 220, 230, 0.92);
-    margin-bottom: var(--space-10);
-    max-width: 680px;
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    font-weight: 400;
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-14);
+    max-width: 720px;
     margin-left: auto;
     margin-right: auto;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 
-    animation: description-entrance 1s var(--ease-out-cubic) 0.6s backwards;
+    animation: description-entrance 0.9s var(--ease-premium) 0.45s backwards;
 }
 
 .hero__description .highlight {
-    color: hsl(45, 85%, 62%);
-    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    font-weight: 600;
     position: relative;
 }
 
