@@ -1,2 +1,59 @@
-# Hemanth
-Portfolio
+# Hemanth Kandimalla | Portfolio
+
+A static React, TypeScript, and Vite 5 portfolio for applied AI research,
+agent harnesses, open-source systems, and technical writing.
+
+## Local development
+
+Install Node.js and npm, then run from this folder:
+
+```sh
+npm ci
+npm run dev
+```
+
+Use the local address printed by Vite. The server does not open a browser or
+expose itself to the network automatically.
+
+## Production build
+
+```sh
+npm run type-check
+npx tsc -p tsconfig.node.json
+npm run build
+npm run preview
+```
+
+The deployable static files are written to `dist/`. The build uses Vite's
+included esbuild minifier; no Terser installation or manual source-file chunks
+are required. Only `@/*` is configured as an alias for `src/`.
+
+## Hosting and paths
+
+`VITE_BASE_PATH` controls Vite's public base path. Set it in the build environment
+or an untracked `.env.production.local` file:
+
+```dotenv
+VITE_BASE_PATH=/
+```
+
+- **Custom domain or account-level GitHub Pages:** keep `/`.
+- **Repository-level GitHub Pages:** use `/REPOSITORY_NAME/`, then build again.
+- **GitHub Pages deployment:** publish the contents of `dist/` using the existing
+  Pages deployment process. For a custom domain, `public/CNAME` must contain the
+  actual domain, matching the repository's Pages settings and DNS configuration.
+
+Reference public assets through `import.meta.env.BASE_URL` so they work under
+both root and repository paths. Changes to this code do not configure hosting,
+publish a site, or change a domain.
+
+## Content and public files
+
+Keep project, book, article, and employment content in the portfolio data source;
+the React app controls presentation. The public contact area uses email and
+profile links. Keep the private phone number out of both the site and the public
+resume PDF. Add a portrait only when the candidate supplies a real photograph.
+
+Files in `public/` are copied into the published build. Replace the public resume
+with its updated phone-free version when career details change. Do not store
+private documents, environment secrets, or development exports there.
