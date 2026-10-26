@@ -39,13 +39,17 @@ VITE_BASE_PATH=/
 
 - **Custom domain or account-level GitHub Pages:** keep `/`.
 - **Repository-level GitHub Pages:** use `/REPOSITORY_NAME/`, then build again.
-- **GitHub Pages deployment:** publish the contents of `dist/` using the existing
-  Pages deployment process. For a custom domain, `public/CNAME` must contain the
-  actual domain, matching the repository's Pages settings and DNS configuration.
+- **GitHub Pages deployment:** `.github/workflows/deploy.yml` builds and deploys
+  every push to `main`, and can also be run manually from GitHub Actions. It
+  reads the base path from Pages metadata, so repository URLs and a later custom
+  domain use the correct asset and resume paths. The repository's Pages source
+  must be set to **GitHub Actions**.
+- **Custom domain:** configure the actual domain in Pages settings and DNS when
+  it is available. Do not add a placeholder domain or `CNAME` file.
 
 Reference public assets through `import.meta.env.BASE_URL` so they work under
-both root and repository paths. Changes to this code do not configure hosting,
-publish a site, or change a domain.
+both root and repository paths. The workflow publishes to the repository's Pages
+URL. Domain and DNS changes are managed separately.
 
 ## Content and public files
 
