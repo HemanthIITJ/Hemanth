@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AgentDiagram } from './components/AgentDiagram';
 import { Icon, type IconName } from './components/Icon';
+import { ProfilePortrait, ContactPortrait } from './components/Portrait';
 import { education, experience, expertise, profile, projects, researchAreas, writings } from './data/portfolio';
 
 const navItems = [{ id: 'research', label: 'Research' }, { id: 'work', label: 'Work' }, { id: 'writing', label: 'Writing' }, { id: 'experience', label: 'Experience' }];
@@ -76,13 +77,13 @@ function App() {
           <div className="hero-actions"><a href="#work" className="button button-primary">Explore my work <Icon name="arrow" size={18} /></a><a href={resumeHref} className="text-link" target="_blank" rel="noopener noreferrer">Résumé <Icon name="download" size={17} /></a></div>
           <div className="hero-current"><span className="micro">CURRENTLY</span><span>Applied AI Scientist <span className="muted">at</span> Celebal Technologies</span></div>
         </div>
-        <AgentDiagram />
+        <ProfilePortrait />
         <div className="hero-footnote"><span>Research questions. Working code. Open writing.</span><a href="#research">A closer look <span aria-hidden="true">↓</span></a></div>
       </section>
 
       <section id="research" className="section research-section" aria-labelledby="research-title">
         <div className="container">
-          <div className="section-heading"><div className="section-label"><span className="section-number">01</span><span className="micro">RESEARCH DIRECTION</span></div><div className="section-heading-main"><h2 id="research-title">Capability is a starting point.<br /><em>Control is the question.</em></h2><p>My core research focus is agent alignment and control. My engineering work makes those questions concrete through memory, context, graphs, and execution loops.</p></div></div>
+          <div className="research-overview"><div className="research-overview-copy"><div className="section-label"><span className="section-number">01</span><span className="micro">RESEARCH DIRECTION</span></div><h2 id="research-title">Capability is a starting point.<br /><em>Control is the question.</em></h2><p>My core research focus is agent alignment and control. My engineering work makes those questions concrete through memory, context, graphs, and execution loops.</p></div><AgentDiagram /></div>
           <div className="research-grid">{researchAreas.map((area, index) => <article className="research-item" key={area.id}><div className="research-item-top"><Icon name={(['shield', 'memory', 'graph'] as IconName[])[index]} size={25} /><span className="mono">0{index + 1}</span></div><h3>{area.title}</h3><p>{area.description}</p><ul className="mechanism-list">{area.mechanisms.map(mechanism => <li key={mechanism}><span aria-hidden="true">↳</span>{mechanism}</li>)}</ul></article>)}</div>
           <div className="research-note"><span className="note-marker" aria-hidden="true">↳</span><p>Alongside research, I build the training, inference, and application infrastructure that lets ideas meet real constraints.</p></div>
         </div>
@@ -118,7 +119,7 @@ function App() {
 
       <section className="practice-section container" aria-labelledby="practice-title"><div className="practice-intro"><span className="micro">METHODS & TOOLS</span><h2 id="practice-title">The working toolkit.</h2><p>Selected methods and tools used across my engineering work and research.</p></div><div className="expertise-list">{expertise.map(group => <div className="expertise-row" key={group.title}><h3>{group.title}</h3><p>{group.items.join(' · ')}</p></div>)}</div></section>
 
-      <section id="contact" className="contact-section" aria-labelledby="contact-title"><div className="container"><div className="contact-main"><div><span className="micro">KEEP THE CONVERSATION OPEN</span><h2 id="contact-title">Let’s compare<br /><em>notes.</em></h2></div><div className="contact-content"><p>Research collaborations, applied AI systems, or a difficult engineering problem. Email is the best place to start.</p><a className="contact-email" href={`mailto:${profile.email}`}>{profile.email}<Icon name="arrowUp" size={21} /></a><button type="button" onClick={copyEmail} className="copy-email"><Icon name={copied ? 'check' : 'copy'} size={16} /><span aria-live="polite">{copied ? 'Email copied' : 'Copy email address'}</span></button></div></div><div className="contact-bottom"><span>{profile.location}</span><div className="social-links"><ExternalLink href={profile.linkedin}><Icon name="linkedin" size={17} />LinkedIn</ExternalLink>{profile.github.map(account => <ExternalLink key={account.name} href={account.url}><Icon name="github" size={17} />{account.name}</ExternalLink>)}</div></div></div></section>
+      <section id="contact" className="contact-section" aria-labelledby="contact-title"><div className="container"><div className="contact-main"><div className="contact-intro"><span className="micro">KEEP THE CONVERSATION OPEN</span><h2 id="contact-title">Let’s compare<br /><em>notes.</em></h2><ContactPortrait /></div><div className="contact-content"><p>Research collaborations, applied AI systems, or a difficult engineering problem. Email is the best place to start.</p><a className="contact-email" href={`mailto:${profile.email}`}>{profile.email}<Icon name="arrowUp" size={21} /></a><button type="button" onClick={copyEmail} className="copy-email"><Icon name={copied ? 'check' : 'copy'} size={16} /><span aria-live="polite">{copied ? 'Email copied' : 'Copy email address'}</span></button></div></div><div className="contact-bottom"><span>{profile.location}</span><div className="social-links"><ExternalLink href={profile.linkedin}><Icon name="linkedin" size={17} />LinkedIn</ExternalLink>{profile.github.map(account => <ExternalLink key={account.name} href={account.url}><Icon name="github" size={17} />{account.name}</ExternalLink>)}</div></div></div></section>
     </main>
     <footer className="site-footer container"><a href="#home">Hemanth Kandimalla<span aria-hidden="true"> ↗</span></a><span>© 2026 · Research & engineering</span><a href="#home" className="back-top">Back to top ↑</a></footer>
   </>;

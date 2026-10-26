@@ -58,6 +58,11 @@ the React app controls presentation. The public contact area uses email and
 profile links. Keep the private phone number out of both the site and the public
 resume PDF. Add a portrait only when the candidate supplies a real photograph.
 
+The hero and contact portraits use candidate-supplied photographs in
+`src/assets/portraits/`. `Portrait.tsx` and `Portrait.css` control their framing,
+captions, and responsive crops. The source JPEGs retain their original pixels;
+Vite handles their published asset paths.
+
 Files in `public/` are copied into the published build. Replace the public resume
 with its updated phone-free version when career details change. Do not store
 private documents, environment secrets, or development exports there.
