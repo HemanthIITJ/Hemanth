@@ -11,6 +11,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './styles.css';
+import './mobile-shell.css';
+import './mobile-content.css';
 
 /* Mount React application with StrictMode enabled */
 ReactDOM.createRoot(document.getElementById('root')!).render(

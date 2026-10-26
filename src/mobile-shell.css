@@ -1,0 +1,260 @@
+.mobile-resume {
+  display: none;
+}
+
+.mobile-action-label {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  html {
+    scroll-padding-top: 90px;
+  }
+
+  .container {
+    width: min(640px, calc(100% - 40px));
+  }
+
+  .desktop-nav,
+  .nav-contact {
+    display: none;
+  }
+
+  .site-header {
+    background: var(--paper);
+    backdrop-filter: none;
+  }
+
+  .nav-shell {
+    height: 70px;
+    gap: 10px;
+  }
+
+  .wordmark {
+    min-width: 0;
+    gap: 8px;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .wordmark-symbol {
+    font-size: 34px;
+  }
+
+  .mobile-resume {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    gap: 7px;
+    min-height: 44px;
+    margin-left: auto;
+    padding: 0 11px;
+    border: 1px solid #cdd4c4;
+    border-radius: 4px;
+    background: #eef1e7;
+    color: var(--green-dark);
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #cdd4c4;
+    border-radius: 4px;
+  }
+
+  .mobile-nav.container {
+    display: grid;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: calc(100svh - 70px);
+    margin: 0;
+    padding: 10px max(20px, calc(50vw - 320px)) 20px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+    box-shadow: 0 20px 30px -28px #173e3380;
+  }
+
+  .mobile-nav a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 52px;
+    padding: 12px 10px;
+    font-size: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .mobile-nav a[aria-current] {
+    background: #edf1e5;
+    color: var(--green-dark);
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr) 112px;
+    column-gap: 18px;
+    row-gap: 0;
+    align-items: center;
+    padding-top: 28px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-content {
+    display: contents;
+  }
+
+  .hero-eyebrow {
+    grid-column: 1 / -1;
+    margin: 0 0 22px;
+    gap: 10px;
+  }
+
+  .hero-eyebrow .micro {
+    font-size: 11px;
+    line-height: 1.6;
+    letter-spacing: .06em;
+  }
+
+  .hero h1 {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+    font-size: clamp(42px, 13.2vw, 58px);
+    line-height: 1;
+    letter-spacing: -.04em;
+  }
+
+  .hero > .profile-portrait {
+    grid-column: 2;
+    grid-row: 2;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    align-self: center;
+    justify-self: end;
+  }
+
+  .hero .profile-portrait__frame {
+    padding: 5px;
+    border-color: #cdd3c4;
+    border-radius: 3px;
+  }
+
+  .hero .profile-portrait__image {
+    aspect-ratio: 4 / 5;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .hero .profile-portrait__caption {
+    display: none;
+  }
+
+  .hero-focus {
+    grid-column: 1 / -1;
+    margin-top: 24px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    letter-spacing: -.025em;
+  }
+
+  .hero-description {
+    grid-column: 1 / -1;
+    max-width: 520px;
+    margin-top: 12px;
+    color: #596352;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .hero-actions .button,
+  .hero-actions .text-link {
+    justify-content: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 12px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .hero-actions .text-link {
+    border: 1px solid #c5cebb;
+    background: var(--white);
+  }
+
+  .hero-actions .desktop-action-label {
+    display: none;
+  }
+
+  .hero-actions .mobile-action-label {
+    display: inline;
+  }
+
+  .hero-current {
+    grid-column: 1 / -1;
+    gap: 5px;
+    margin-top: 24px;
+    padding: 13px 15px;
+    border: 1px solid #d6ddcb;
+    border-left: 3px solid #638351;
+    border-radius: 4px;
+    background: #f0f3e9;
+  }
+
+  .hero-current > .micro {
+    color: #637357;
+    font-size: 11px;
+    line-height: 1.5;
+    letter-spacing: .08em;
+  }
+
+  .hero-current > span + span {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .hero-footnote {
+    display: none;
+  }
+}
+
+@media (max-width: 359px) {
+  .mobile-resume {
+    width: 44px;
+    padding: 0;
+  }
+
+  .mobile-resume > span {
+    display: none;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr) 92px;
+    column-gap: 12px;
+  }
+}

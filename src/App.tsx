@@ -24,6 +24,8 @@ function App() {
   const [filter, setFilter] = useState<Filter>('All work');
   const [copied, setCopied] = useState(false);
   const copyTimer = useRef<ReturnType<typeof setTimeout>>();
+  const menuToggle = useRef<HTMLButtonElement>(null);
+  const header = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
@@ -35,10 +37,31 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const onEscape = (event: KeyboardEvent) => { if (event.key === 'Escape') setMenuOpen(false); };
+    const onEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && document.getElementById('mobile-nav')) {
+        setMenuOpen(false);
+        menuToggle.current?.focus();
+      }
+    };
     window.addEventListener('keydown', onEscape);
     return () => { window.removeEventListener('keydown', onEscape); if (copyTimer.current) clearTimeout(copyTimer.current); };
   }, []);
+
+  useEffect(() => {
+    const screen = window.matchMedia('(max-width: 900px)');
+    const onResize = () => { if (!screen.matches) setMenuOpen(false); };
+    screen.addEventListener('change', onResize);
+    return () => screen.removeEventListener('change', onResize);
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onOutsidePress = (event: PointerEvent) => {
+      if (event.target instanceof Node && !header.current?.contains(event.target)) setMenuOpen(false);
+    };
+    document.addEventListener('pointerdown', onOutsidePress);
+    return () => document.removeEventListener('pointerdown', onOutsidePress);
+  }, [menuOpen]);
 
   async function copyEmail() {
     try {
@@ -57,14 +80,15 @@ function App() {
 
   return <>
     <a href="#main" className="skip-link">Skip to content</a>
-    <header className="site-header">
+    <header className="site-header" ref={header}>
       <div className="container nav-shell">
         <a className="wordmark" href="#home" aria-label="Hemanth Kandimalla, home"><span className="wordmark-symbol" aria-hidden="true">h<span>.</span></span><span>Hemanth Kandimalla</span></a>
         <nav className="desktop-nav" aria-label="Main navigation">{navItems.map(item => <a href={`#${item.id}`} key={item.id} className={activeSection === item.id ? 'is-active' : ''}>{item.label}</a>)}</nav>
         <a className="nav-contact" href="#contact">Let’s talk <Icon name="arrowUp" size={15} /></a>
-        <button type="button" className="mobile-menu-toggle" aria-controls="mobile-nav" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} onClick={() => setMenuOpen(!menuOpen)}><Icon name={menuOpen ? 'close' : 'menu'} /></button>
+        <a className="mobile-resume" href={resumeHref} target="_blank" rel="noopener noreferrer" aria-label="View résumé PDF" onClick={() => setMenuOpen(false)}><Icon name="download" size={16} /><span>Résumé</span></a>
+        <button type="button" ref={menuToggle} className="mobile-menu-toggle" aria-controls="mobile-nav" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} onClick={() => setMenuOpen(!menuOpen)}><Icon name={menuOpen ? 'close' : 'menu'} /></button>
       </div>
-      {menuOpen && <nav id="mobile-nav" className="mobile-nav container" aria-label="Mobile navigation">{[...navItems, { id: 'contact', label: 'Contact' }].map(item => <a key={item.id} href={`#${item.id}`} onClick={() => setMenuOpen(false)}>{item.label}<Icon name="arrowUp" size={17} /></a>)}</nav>}
+      {menuOpen && <nav id="mobile-nav" className="mobile-nav container" aria-label="Mobile navigation">{[...navItems, { id: 'contact', label: 'Contact' }].map(item => <a key={item.id} href={`#${item.id}`} aria-current={activeSection === item.id ? 'location' : undefined} onClick={() => setMenuOpen(false)}>{item.label}<Icon name="arrowUp" size={17} /></a>)}</nav>}
     </header>
 
     <main id="main">
@@ -74,7 +98,7 @@ function App() {
           <h1 id="hero-title">Hemanth<br /><em>Kandimalla.</em></h1>
           <p className="hero-focus">Agent alignment. Control. AI engineering.</p>
           <p className="hero-description">I research the alignment and control of agentic systems, and engineer the models, harnesses, and infrastructure around them.</p>
-          <div className="hero-actions"><a href="#work" className="button button-primary">Explore my work <Icon name="arrow" size={18} /></a><a href={resumeHref} className="text-link" target="_blank" rel="noopener noreferrer">Résumé <Icon name="download" size={17} /></a></div>
+          <div className="hero-actions"><a href="#work" className="button button-primary"><span className="desktop-action-label">Explore my work</span><span className="mobile-action-label">View work</span><Icon name="arrow" size={18} /></a><a href={resumeHref} className="text-link" target="_blank" rel="noopener noreferrer">Résumé <Icon name="download" size={17} /></a></div>
           <div className="hero-current"><span className="micro">CURRENTLY</span><span>Applied AI Scientist <span className="muted">at</span> Celebal Technologies</span></div>
         </div>
         <ProfilePortrait />

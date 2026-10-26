@@ -63,6 +63,11 @@ The hero and contact portraits use candidate-supplied photographs in
 captions, and responsive crops. The source JPEGs retain their original pixels;
 Vite handles their published asset paths.
 
+`mobile-shell.css` controls the compact introduction and persistent resume/menu
+actions. `mobile-content.css` reflows research controls, projects, books, and
+career details for screens up to 900px. Import both after the desktop styles;
+keep reading text and touch targets usable when extending the mobile layout.
+
 Files in `public/` are copied into the published build. Replace the public resume
 with its updated phone-free version when career details change. Do not store
 private documents, environment secrets, or development exports there.
