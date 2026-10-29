@@ -74,7 +74,7 @@ export const profile: Profile = {
     { name: 'generalaimodels', url: 'https://github.com/generalaimodels' },
     { name: 'HemanthIITJ', url: 'https://github.com/HemanthIITJ' },
   ],
-  resumeUrl: '/Hemanth_Kandimalla_Resume.pdf',
+  resumeUrl: '/Hemanth_Kandimalla_Resume.pdf?v=2026-10-29',
 };
 
 export const researchAreas: ResearchArea[] = [

@@ -75,3 +75,8 @@ AutonomyAtlas, using its source classification of technical monograph.
 Files in `public/` are copied into the published build. Replace the public resume
 with its updated phone-free version when career details change. Do not store
 private documents, environment secrets, or development exports there.
+
+All resume buttons use `profile.resumeUrl` and Vite's base path, producing
+`/Hemanth/Hemanth_Kandimalla_Resume.pdf` for repository Pages and the corresponding
+root path on a custom domain. Bump the `v` query value in `src/data/portfolio.ts`
+when replacing the PDF so returning visitors receive the revised public version.
