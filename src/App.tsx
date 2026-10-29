@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { AgentDiagram } from './components/AgentDiagram';
 import { Icon, type IconName } from './components/Icon';
 import { ProfilePortrait, ContactPortrait } from './components/Portrait';
-import { education, experience, expertise, profile, projects, researchAreas, writings } from './data/portfolio';
+import { ExpertisePanel } from './components/ExpertisePanel';
+import { SelectedProof } from './components/SelectedProof';
+import { ResearchFeature } from './components/ResearchFeature';
+import { education, experience, profile, projects, researchAreas, writings } from './data/portfolio';
 
 const navItems = [{ id: 'research', label: 'Research' }, { id: 'work', label: 'Work' }, { id: 'writing', label: 'Writing' }, { id: 'experience', label: 'Experience' }];
 const filters = ['All work', 'Model systems', 'Developer tools', 'Agent workflows'] as const;
@@ -84,7 +87,7 @@ function App() {
       <div className="container nav-shell">
         <a className="wordmark" href="#home" aria-label="Hemanth Kandimalla, home"><span className="wordmark-symbol" aria-hidden="true">h<span>.</span></span><span>Hemanth Kandimalla</span></a>
         <nav className="desktop-nav" aria-label="Main navigation">{navItems.map(item => <a href={`#${item.id}`} key={item.id} className={activeSection === item.id ? 'is-active' : ''}>{item.label}</a>)}</nav>
-        <a className="nav-contact" href="#contact">Let’s talk <Icon name="arrowUp" size={15} /></a>
+        <a className="nav-contact" href="#contact">Contact <Icon name="arrowUp" size={15} /></a>
         <a className="mobile-resume" href={resumeHref} target="_blank" rel="noopener noreferrer" aria-label="View résumé PDF" onClick={() => setMenuOpen(false)}><Icon name="download" size={16} /><span>Résumé</span></a>
         <button type="button" ref={menuToggle} className="mobile-menu-toggle" aria-controls="mobile-nav" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} onClick={() => setMenuOpen(!menuOpen)}><Icon name={menuOpen ? 'close' : 'menu'} /></button>
       </div>
@@ -105,16 +108,18 @@ function App() {
         <div className="hero-footnote"><span>Research questions. Working code. Open writing.</span><a href="#research">A closer look <span aria-hidden="true">↓</span></a></div>
       </section>
 
+      <SelectedProof />
+
       <section id="research" className="section research-section" aria-labelledby="research-title">
         <div className="container">
-          <div className="research-overview"><div className="research-overview-copy"><div className="section-label"><span className="section-number">01</span><span className="micro">RESEARCH DIRECTION</span></div><h2 id="research-title">Capability is a starting point.<br /><em>Control is the question.</em></h2><p>My core research focus is agent alignment and control. My engineering work makes those questions concrete through memory, context, graphs, and execution loops.</p></div><AgentDiagram /></div>
+          <div className="research-overview"><div className="research-overview-copy"><div className="section-label"><span className="section-number">01</span><span className="micro">RESEARCH DIRECTION</span></div><h2 id="research-title">Agent alignment<br /><em>&amp; control.</em></h2><p>My core research focus is agent alignment and control. My engineering work makes those questions concrete through memory, context, graphs, and execution loops.</p></div><AgentDiagram /></div>
           <div className="research-grid">{researchAreas.map((area, index) => <article className="research-item" key={area.id}><div className="research-item-top"><Icon name={(['shield', 'memory', 'graph'] as IconName[])[index]} size={25} /><span className="mono">0{index + 1}</span></div><h3>{area.title}</h3><p>{area.description}</p><ul className="mechanism-list">{area.mechanisms.map(mechanism => <li key={mechanism}><span aria-hidden="true">↳</span>{mechanism}</li>)}</ul></article>)}</div>
           <div className="research-note"><span className="note-marker" aria-hidden="true">↳</span><p>Alongside research, I build the training, inference, and application infrastructure that lets ideas meet real constraints.</p></div>
         </div>
       </section>
 
       <section id="work" className="section work-section container" aria-labelledby="work-title">
-        <SectionHeading id="work-title" number="02" eyebrow="SELECTED OPEN SOURCE" title="Ideas, made inspectable."><p>A selection of systems and tools I’ve built. The source is the most useful place to understand the work.</p></SectionHeading>
+        <SectionHeading id="work-title" number="02" eyebrow="SELECTED OPEN SOURCE" title="Selected engineering."><p>A selection of systems and tools I’ve built. The source is the most useful place to understand the work.</p></SectionHeading>
         <div className="work-toolbar"><div className="filter-list" aria-label="Filter engineering projects">{filters.map(item => <button key={item} type="button" onClick={() => setFilter(item)} className={filter === item ? 'filter-button is-active' : 'filter-button'} aria-pressed={filter === item}>{item}</button>)}</div><span className="work-count mono" aria-live="polite">{String(visibleProjects.length).padStart(2, '0')} projects</span></div>
         <div className="projects-list">{visibleProjects.map(project => <article className={`project ${project.id === 'trainscale' ? 'project-featured' : ''}`} key={project.id}>
           <div className="project-number mono">{String(projects.indexOf(project) + 1).padStart(2, '0')} /</div>
@@ -125,7 +130,8 @@ function App() {
       </section>
 
       <section id="writing" className="section writing-section" aria-labelledby="writing-title">
-        <div className="container"><div className="section-heading"><div className="section-label"><span className="section-number">03</span><span className="micro">BOOKS & TECHNICAL WRITING</span></div><div className="section-heading-main"><h2 id="writing-title">Thinking in public.<br /><em>One layer deeper.</em></h2><p>I write to connect mechanisms with the systems around them. These are online technical books and engineering analyses.</p></div></div>
+        <div className="container"><div className="section-heading"><div className="section-label"><span className="section-number">03</span><span className="micro">BOOKS & TECHNICAL WRITING</span></div><div className="section-heading-main"><h2 id="writing-title">Research &amp;<br /><em>technical writing.</em></h2><p>Research synthesis, technical books, and engineering analyses.</p></div></div>
+          <ResearchFeature />
           <div className="books-grid">{books.map((book, index) => <article className={`book-card book-${index + 1}`} key={book.id}>
             <ExternalLink href={book.url} className="book-cover" label={`Read ${book.title}`}><span className="book-cover-top"><span className="micro">NEURAL ATLAS</span><span className="mono">0{index + 1} / 03</span></span><span className="book-cover-title">{book.title}</span><span className={`book-cover-art cover-art-${index + 1}`} aria-hidden="true">{Array.from({ length: 5 }, (_, i) => <span key={i} />)}</span><span className="book-cover-bottom"><span>Hemanth Kandimalla</span><Icon name="arrowUp" size={20} /></span></ExternalLink>
             <div className="book-info"><span className="writing-status"><span />{book.status}</span><p>{book.description}</p><ExternalLink href={book.url} className="inline-link">Read online <Icon name="arrowUp" size={15} /></ExternalLink></div>
@@ -135,15 +141,15 @@ function App() {
       </section>
 
       <section id="experience" className="section experience-section container" aria-labelledby="experience-title">
-        <SectionHeading id="experience-title" number="04" eyebrow="THE WORK SO FAR" title="Research, with an engineering backbone."><p>Applied AI, public-sector R&D, and an earlier foundation in wireless systems.</p></SectionHeading>
+        <SectionHeading id="experience-title" number="04" eyebrow="EXPERIENCE" title="Professional experience."><p>Applied AI, public-sector R&D, and an earlier foundation in wireless systems.</p></SectionHeading>
         <div className="experience-layout"><div className="experience-list">{experience.map((job, index) => <article className="experience-item" key={job.id}><div className="experience-period"><span className={index === 0 ? 'experience-dot is-current' : 'experience-dot'} /><span className="mono">{job.period}</span>{index === 0 && <span className="current-label">Current</span>}</div><div className="experience-content"><h3>{job.company}</h3><p className="job-title">{job.title}</p><p className="job-focus">{job.focus}</p><p className="job-summary">{job.summary}</p><details><summary>Selected contributions <Icon name="chevron" size={16} /></summary><ul>{job.bullets.map(bullet => <li key={bullet}>{bullet}</li>)}</ul></details></div></article>)}</div>
           <aside className="education-card"><span className="micro">FOUNDATIONS</span><Icon name="book" size={25} /><h3>IIT Jammu</h3><p>{education.degree}</p><div className="education-meta"><span>{education.period}</span><span>CGPA {education.cgpa}</span></div><div className="education-project"><span className="micro">M.TECH RESEARCH</span><p>{education.project}</p></div><a href={resumeHref} target="_blank" rel="noopener noreferrer" className="inline-link">View full résumé <Icon name="download" size={15} /></a></aside>
         </div>
       </section>
 
-      <section className="practice-section container" aria-labelledby="practice-title"><div className="practice-intro"><span className="micro">METHODS & TOOLS</span><h2 id="practice-title">The working toolkit.</h2><p>Selected methods and tools used across my engineering work and research.</p></div><div className="expertise-list">{expertise.map(group => <div className="expertise-row" key={group.title}><h3>{group.title}</h3><p>{group.items.join(' · ')}</p></div>)}</div></section>
+      <section className="practice-section container" aria-labelledby="practice-title"><div className="practice-intro"><span className="micro">METHODS & TOOLS</span><h2 id="practice-title">Engineering capabilities.</h2><p>Selected methods and tools used across my engineering work and research.</p></div><ExpertisePanel /></section>
 
-      <section id="contact" className="contact-section" aria-labelledby="contact-title"><div className="container"><div className="contact-main"><div className="contact-intro"><span className="micro">KEEP THE CONVERSATION OPEN</span><h2 id="contact-title">Let’s compare<br /><em>notes.</em></h2><ContactPortrait /></div><div className="contact-content"><p>Research collaborations, applied AI systems, or a difficult engineering problem. Email is the best place to start.</p><a className="contact-email" href={`mailto:${profile.email}`}>{profile.email}<Icon name="arrowUp" size={21} /></a><button type="button" onClick={copyEmail} className="copy-email"><Icon name={copied ? 'check' : 'copy'} size={16} /><span aria-live="polite">{copied ? 'Email copied' : 'Copy email address'}</span></button></div></div><div className="contact-bottom"><span>{profile.location}</span><div className="social-links"><ExternalLink href={profile.linkedin}><Icon name="linkedin" size={17} />LinkedIn</ExternalLink>{profile.github.map(account => <ExternalLink key={account.name} href={account.url}><Icon name="github" size={17} />{account.name}</ExternalLink>)}</div></div></div></section>
+      <section id="contact" className="contact-section" aria-labelledby="contact-title"><div className="container"><div className="contact-main"><div className="contact-intro"><span className="micro">ROLES · RESEARCH · PROJECTS</span><h2 id="contact-title">Contact<br /><em>Hemanth.</em></h2><ContactPortrait /></div><div className="contact-content"><p>For applied AI roles, research collaborations, and AI engineering projects.</p><a className="contact-email" href={`mailto:${profile.email}`}>{profile.email}<Icon name="arrowUp" size={21} /></a><button type="button" onClick={copyEmail} className="copy-email"><Icon name={copied ? 'check' : 'copy'} size={16} /><span aria-live="polite">{copied ? 'Email copied' : 'Copy email address'}</span></button></div></div><div className="contact-bottom"><span>{profile.location}</span><div className="social-links"><ExternalLink href={profile.linkedin}><Icon name="linkedin" size={17} />LinkedIn</ExternalLink>{profile.github.map(account => <ExternalLink key={account.name} href={account.url}><Icon name="github" size={17} />{account.name}</ExternalLink>)}</div></div></div></section>
     </main>
     <footer className="site-footer container"><a href="#home">Hemanth Kandimalla<span aria-hidden="true"> ↗</span></a><span>© 2026 · Research & engineering</span><a href="#home" className="back-top">Back to top ↑</a></footer>
   </>;

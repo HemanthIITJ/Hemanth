@@ -169,6 +169,19 @@ export const projects: Project[] = [
   },
 ];
 
+export const featuredResearch: Writing & { subtitle: string; sourceUrl: string } = {
+  id: 'autonomyatlas',
+  title: 'Agentic State',
+  subtitle: 'Context, Memory, and Control in Adaptive AI',
+  kind: 'Technical monograph',
+  status: 'Online edition',
+  description:
+    'A research synthesis of context, persistent memory, agent harnesses, orchestration, alignment, and evaluation.',
+  url: 'https://neuralatlasai.github.io/AutonomyAtlas/',
+  sourceUrl: 'https://github.com/neuralatlasai/AutonomyAtlas',
+  topics: ['Context', 'Memory', 'Agent control', 'Evaluation'],
+};
+
 export const writings: Writing[] = [
   {
     id: 'model-stack',

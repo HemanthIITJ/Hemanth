@@ -68,6 +68,10 @@ actions. `mobile-content.css` reflows research controls, projects, books, and
 career details for screens up to 900px. Import both after the desktop styles;
 keep reading text and touch targets usable when extending the mobile layout.
 
+`portfolio-refresh.css` supplies the shared visual refinements. Skills are
+presented by `ExpertisePanel`; `ResearchFeature` links to Agentic State through
+AutonomyAtlas, using its source classification of technical monograph.
+
 Files in `public/` are copied into the published build. Replace the public resume
 with its updated phone-free version when career details change. Do not store
 private documents, environment secrets, or development exports there.
