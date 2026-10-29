@@ -1,59 +1,29 @@
 import { expertise } from '../data/portfolio';
-import { Icon, type IconName } from './Icon';
+import { Icon } from './Icon';
 import './ExpertisePanel.css';
 
-interface GroupPresentation {
-  icon: IconName;
-  description: string;
-}
-
-const presentationByTitle: Record<string, GroupPresentation> = {
-  'Harness & control': {
-    icon: 'shield',
-    description: 'Bound agent actions and verify outcomes.',
-  },
-  'Memory & graph systems': {
-    icon: 'graph',
-    description: 'Carry useful state and connect task dependencies.',
-  },
-  'Model development': {
-    icon: 'layers',
-    description: 'Adapt models through reproducible training workflows.',
-  },
-  'GPU & inference': {
-    icon: 'memory',
-    description: 'Connect kernel-level work with serving constraints.',
-  },
-  'Engineering & evaluation': {
-    icon: 'code',
-    description: 'Inspect code and test system behavior.',
-  },
-};
-
 export function ExpertisePanel() {
-  return (
-    <div className="expertise-grid">
-      {expertise.map(group => {
-        const presentation = presentationByTitle[group.title] ?? {
-          icon: 'code' as IconName,
-          description: 'Methods and tools used across research and engineering.',
-        };
-
-        return (
-          <article className="expertise-card" key={group.title}>
-            <div className="expertise-card__header">
-              <span className="expertise-card__symbol" aria-hidden="true">
-                <Icon name={presentation.icon} size={22} />
-              </span>
-              <h3>{group.title}</h3>
-            </div>
-            <p className="expertise-card__description">{presentation.description}</p>
-            <ul className="expertise-card__tools" aria-label={`${group.title} methods and tools`}>
-              {group.items.map(item => <li key={item}>{item}</li>)}
-            </ul>
-          </article>
-        );
-      })}
+  return <div className="capability-ledger">
+    <div className="capability-ledger__head" aria-hidden="true">
+      <span>Practice</span><span>Mechanisms & concrete work</span><span>Inspect the evidence</span>
     </div>
-  );
+    <ol className="capability-ledger__rows">
+      {expertise.map((area, index) => <li className="capability-row" key={area.id}>
+        <div className="capability-row__title">
+          <span className="capability-row__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <h3>{area.title}</h3>
+        </div>
+        <div className="capability-row__mechanisms">
+          <p>{area.mechanisms}</p>
+          <p className="capability-row__work">{area.work}</p>
+        </div>
+        <ul className="capability-row__evidence" aria-label={`${area.title} public evidence`}>
+          {area.evidence.map(source => <li key={source.url}>
+            <span>{source.kind}</span>
+            <a href={source.url} target="_blank" rel="noopener noreferrer">{source.label}<Icon name="arrowUp" size={15} /></a>
+          </li>)}
+        </ul>
+      </li>)}
+    </ol>
+  </div>;
 }

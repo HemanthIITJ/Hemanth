@@ -22,7 +22,7 @@ export interface Project {
   kind: string;
   status: string;
   summary: string;
-  details: string[];
+  implementation: { title: string; description: string }[];
   stack: string[];
   url: string;
   sourceUrl?: string;
@@ -50,8 +50,11 @@ export interface Experience {
 }
 
 export interface Expertise {
+  id: string;
   title: string;
-  items: string[];
+  mechanisms: string;
+  work: string;
+  evidence: { label: string; kind: string; url: string }[];
 }
 
 export interface Education {
@@ -74,7 +77,7 @@ export const profile: Profile = {
     { name: 'generalaimodels', url: 'https://github.com/generalaimodels' },
     { name: 'HemanthIITJ', url: 'https://github.com/HemanthIITJ' },
   ],
-  resumeUrl: '/Hemanth_Kandimalla_Resume.pdf?v=2026-10-29',
+  resumeUrl: '/Hemanth_Kandimalla_Resume.pdf?v=20261029-536b63d2',
 };
 
 export const researchAreas: ResearchArea[] = [
@@ -123,13 +126,13 @@ export const projects: Project[] = [
     kind: 'Model training infrastructure',
     status: 'Public source',
     summary:
-      'A YAML-driven PyTorch framework connecting data preparation, training objectives, distributed execution, and restartable checkpoints.',
-    details: [
-      'Dataset introspection, prompt construction, tokenization, and sequence packing feed configurable training workflows.',
-      'DPO and SimPO objectives sit alongside LoRA/QLoRA workflows and DDP/FSDP execution paths.',
-      'Triton forward/backward kernels for cross-entropy, RMSNorm, and RoPE integrate with PyTorch autograd, torch.compile, and CUDA Graph paths.',
+      'A YAML-driven PyTorch framework connecting data preparation, model adaptation, distributed execution, and restartable checkpoints.',
+    implementation: [
+      { title: 'Data preparation', description: 'Dataset introspection, prompt construction, tokenization, and sequence packing feed configurable training workflows.' },
+      { title: 'Loss modules & training paths', description: 'Implements DPO/SimPO loss modules; LoRA/QLoRA and DDP/FSDP training paths are configured separately.' },
+      { title: 'Kernel execution', description: 'Triton forward/backward kernels for cross-entropy, RMSNorm, and RoPE connect to PyTorch autograd, torch.compile, and CUDA Graph paths.' },
     ],
-    stack: ['PyTorch', 'Triton', 'DDP / FSDP', 'LoRA / QLoRA', 'DPO / SimPO'],
+    stack: ['PyTorch', 'Triton', 'DDP / FSDP', 'LoRA / QLoRA', 'DPO / SimPO losses'],
     url: 'https://github.com/generalaimodels/TrainScale',
     sourceUrl:
       'https://github.com/generalaimodels/TrainScale/tree/main/data_pipeline/trainer',
@@ -141,10 +144,10 @@ export const projects: Project[] = [
     status: 'Experimental · v0.1',
     summary:
       'An AST-based inventory tool that maps Python SDK surfaces without importing or executing the target package.',
-    details: [
-      'Resolves signatures, inheritance, declared return types, and resource paths from source evidence.',
-      'Exports 14 deterministic CSV, JSONL, and SQLite artifacts with provenance and explicit partial or unknown results.',
-      'Includes differential fixture tests, property tests, fuzz cases, and artifact regressions.',
+    implementation: [
+      { title: 'Reconstruct the interface', description: 'Resolves signatures, inheritance, declared return types, and resource paths from Python source evidence.' },
+      { title: 'Keep uncertainty explicit', description: 'Exports 14 CSV, JSONL, and SQLite artifacts in deterministic order, with provenance and partial or unknown results.' },
+      { title: 'Check the exported evidence', description: 'Differential fixtures, property tests, fuzz cases, and artifact regressions exercise the inventory and its outputs.' },
     ],
     stack: ['Python', 'AST analysis', 'SQLite', 'Hypothesis', 'pytest'],
     url: 'https://github.com/neuralatlasai/SDKAtlas',
@@ -157,10 +160,10 @@ export const projects: Project[] = [
     status: 'Workflow pack · v2.0.0',
     summary:
       'Six software-lifecycle skills with shared evidence contracts, typed records, portable packaging, and deterministic validation.',
-    details: [
-      'Reusable stages cover planning, design, implementation, testing, deployment, and maintenance.',
-      'Artifact schemas, source digests, handoff records, and release manifests make workflow state inspectable.',
-      'A behavioral evaluation harness keeps executed, blocked, and unrun trials distinct from deterministic validation.',
+    implementation: [
+      { title: 'Six lifecycle stages', description: 'Reusable skills cover planning, design, implementation, testing, deployment, and maintenance.' },
+      { title: 'Inspect each handoff', description: 'Artifact schemas, source digests, typed records, and release manifests carry the evidence between stages.' },
+      { title: 'Separate checks from outcomes', description: 'Behavioral evaluation specifications distinguish executed, blocked, and unrun trials from deterministic validation.' },
     ],
     stack: ['Agent Skills', 'Python', 'JSON Schema', 'Evaluation harnesses'],
     url: 'https://github.com/neuralatlasai/NeuralSkills',
@@ -176,7 +179,7 @@ export const featuredResearch: Writing & { subtitle: string; sourceUrl: string }
   kind: 'Technical monograph',
   status: 'Online edition',
   description:
-    'A research synthesis of context, persistent memory, agent harnesses, orchestration, alignment, and evaluation.',
+    'A cross-layer research synthesis connecting context–memory–policy consistency with authorization, tool execution, verification, and self-improvement.',
   url: 'https://neuralatlasai.github.io/AutonomyAtlas/',
   sourceUrl: 'https://github.com/neuralatlasai/AutonomyAtlas',
   topics: ['Context', 'Memory', 'Agent control', 'Evaluation'],
@@ -273,24 +276,53 @@ export const experience: Experience[] = [
 
 export const expertise: Expertise[] = [
   {
-    title: 'Harness & control',
-    items: ['State machines', 'Verification & repair', 'MCP / JSON-RPC', 'Agent Skills'],
+    id: 'agent-harnesses',
+    title: 'Agent harnesses & control',
+    mechanisms: 'Execution state, tool contracts, MCP/JSON-RPC boundaries, permission checks, verification, and recovery.',
+    work: 'Connect model proposals to execution authority and evidence of external effects.',
+    evidence: [
+      { label: 'Agentic State · harnesses', kind: 'Research synthesis', url: 'https://neuralatlasai.github.io/AutonomyAtlas/chapters/20-harnesses/' },
+      { label: 'NeuralSkills · governance', kind: 'Workflow contracts', url: 'https://github.com/neuralatlasai/NeuralSkills/blob/main/ai_sdlc_skills/shared/governance.md' },
+    ],
   },
   {
-    title: 'Memory & graph systems',
-    items: ['Persistent state', 'Context construction', 'RAG', 'Workflow & knowledge graphs'],
+    id: 'context-memory',
+    title: 'Context & persistent memory',
+    mechanisms: 'Session histories, context assembly, retrieval, memory validity, provenance, and workflow dependencies.',
+    work: 'Analyze which information reaches the next decision and what must remain consistent when memory changes.',
+    evidence: [
+      { label: 'Agentic State · consistency', kind: 'Research synthesis', url: 'https://neuralatlasai.github.io/AutonomyAtlas/chapters/17-consistency/' },
+    ],
   },
   {
-    title: 'Model development',
-    items: ['PyTorch', 'Transformers', 'SFT', 'DPO / SimPO', 'LoRA / QLoRA', 'DDP / FSDP'],
+    id: 'skills-evaluation',
+    title: 'Agent Skills & evaluation',
+    mechanisms: 'Reusable instructions, typed evidence records, schema validation, portable bundles, and trace-backed assessment.',
+    work: 'NeuralSkills packages six lifecycle stages and keeps deterministic validation separate from behavioral qualification.',
+    evidence: [
+      { label: 'AI-SDLC skill pack', kind: 'Implementation & contracts', url: 'https://github.com/neuralatlasai/NeuralSkills/tree/main/ai_sdlc_skills' },
+      { label: 'Evaluation cases', kind: 'Assessment specification', url: 'https://github.com/neuralatlasai/NeuralSkills/blob/main/ai_sdlc_skills/evaluations/cases.md' },
+    ],
   },
   {
-    title: 'GPU & inference',
-    items: ['Triton / autograd', 'torch.compile', 'CUDA Graphs', 'vLLM', 'KV-cache', 'Quantization'],
+    id: 'model-systems',
+    title: 'Model training & GPU paths',
+    mechanisms: 'Data packing, LoRA/QLoRA and DDP/FSDP paths, DPO/SimPO loss modules, Triton kernels, and PyTorch autograd.',
+    work: 'TrainScale provides configurable data, trainer, loss, kernel, and checkpoint modules.',
+    evidence: [
+      { label: 'TrainScale · trainer', kind: 'Software source', url: 'https://github.com/generalaimodels/TrainScale/tree/main/data_pipeline/trainer' },
+      { label: 'Kernel implementations', kind: 'Software source', url: 'https://github.com/generalaimodels/TrainScale/tree/main/data_pipeline/trainer/kernels' },
+    ],
   },
   {
-    title: 'Engineering & evaluation',
-    items: ['Python / C++', 'FastAPI', 'AST analysis', 'Deterministic validation', 'Docker / Linux'],
+    id: 'source-analysis',
+    title: 'Static analysis & verification',
+    mechanisms: 'Python ASTs, signatures, inheritance and resource resolution, explicit uncertainty, and artifact regression checks.',
+    work: 'SDKAtlas converts source evidence into queryable CSV, JSONL, and SQLite inventories without importing the target package.',
+    evidence: [
+      { label: 'SDKAtlas · analyzer', kind: 'Software source', url: 'https://github.com/neuralatlasai/SDKAtlas/tree/main/src/sdk_atlas' },
+      { label: 'Testing contracts', kind: 'Verification specification', url: 'https://github.com/neuralatlasai/SDKAtlas/blob/main/docs/testing.md' },
+    ],
   },
 ];
 

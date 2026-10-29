@@ -5,7 +5,7 @@ export function SelectedProof() {
   const items: { title: string; detail: string; icon: IconName; url: string }[] = [
     { title: 'TrainScale', detail: 'Model training infrastructure', icon: 'layers', url: projects.find(project => project.id === 'trainscale')!.url },
     { title: 'SDKAtlas', detail: 'Static SDK analysis', icon: 'code', url: projects.find(project => project.id === 'sdkatlas')!.url },
-    { title: 'AutonomyAtlas', detail: 'Agentic-state monograph', icon: 'graph', url: featuredResearch.url },
+    { title: 'Agentic State', detail: 'Research synthesis · Monograph', icon: 'book', url: featuredResearch.url },
   ];
 
   return <div className="proof-strip container" aria-label="Selected engineering and research">

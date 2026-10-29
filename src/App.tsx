@@ -5,6 +5,7 @@ import { ProfilePortrait, ContactPortrait } from './components/Portrait';
 import { ExpertisePanel } from './components/ExpertisePanel';
 import { SelectedProof } from './components/SelectedProof';
 import { ResearchFeature } from './components/ResearchFeature';
+import { ProjectCase } from './components/ProjectCase';
 import { education, experience, profile, projects, researchAreas, writings } from './data/portfolio';
 
 const navItems = [{ id: 'research', label: 'Research' }, { id: 'work', label: 'Work' }, { id: 'writing', label: 'Writing' }, { id: 'experience', label: 'Experience' }];
@@ -37,6 +38,46 @@ function App() {
     }, { rootMargin: '-12% 0px -55% 0px', threshold: [0, .1, .25] });
     document.querySelectorAll('main > section[id]').forEach(section => observer.observe(section));
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const initialHash = window.location.hash;
+    if (!initialHash || initialHash === '#') return;
+    let cancelled = false;
+    let interacted = false;
+    let firstFrame = 0;
+    let secondFrame = 0;
+    const interactionEvents = ['pointerdown', 'wheel', 'touchstart', 'keydown'] as const;
+    const noteInteraction = () => { interacted = true; };
+    const stopListening = () => interactionEvents.forEach(event => window.removeEventListener(event, noteInteraction));
+    interactionEvents.forEach(event => window.addEventListener(event, noteInteraction, { passive: true, once: true }));
+
+    void document.fonts.ready.then(() => {
+      if (cancelled) return;
+      firstFrame = requestAnimationFrame(() => {
+        secondFrame = requestAnimationFrame(() => {
+          stopListening();
+          if (cancelled || interacted || window.location.hash !== initialHash) return;
+          let target: HTMLElement | null;
+          try { target = document.getElementById(decodeURIComponent(initialHash.slice(1))); }
+          catch { return; }
+          if (!target) return;
+          // React mounts after the browser's first fragment lookup. Restore it
+          // once layout is ready, without animating or overriding later input.
+          const root = document.documentElement;
+          const previous = root.style.scrollBehavior;
+          root.style.scrollBehavior = 'auto';
+          target.scrollIntoView({ block: 'start', behavior: 'auto' });
+          root.style.scrollBehavior = previous;
+        });
+      });
+    });
+    return () => {
+      cancelled = true;
+      stopListening();
+      cancelAnimationFrame(firstFrame);
+      cancelAnimationFrame(secondFrame);
+    };
   }, []);
 
   useEffect(() => {
@@ -86,7 +127,7 @@ function App() {
     <header className="site-header" ref={header}>
       <div className="container nav-shell">
         <a className="wordmark" href="#home" aria-label="Hemanth Kandimalla, home"><span className="wordmark-symbol" aria-hidden="true">h<span>.</span></span><span>Hemanth Kandimalla</span></a>
-        <nav className="desktop-nav" aria-label="Main navigation">{navItems.map(item => <a href={`#${item.id}`} key={item.id} className={activeSection === item.id ? 'is-active' : ''}>{item.label}</a>)}</nav>
+        <nav className="desktop-nav" aria-label="Main navigation">{navItems.map(item => <a href={`#${item.id}`} key={item.id} className={activeSection === item.id ? 'is-active' : ''} aria-current={activeSection === item.id ? 'location' : undefined}>{item.label}</a>)}</nav>
         <a className="nav-contact" href="#contact">Contact <Icon name="arrowUp" size={15} /></a>
         <a className="mobile-resume" href={resumeHref} target="_blank" rel="noopener noreferrer" aria-label="View résumé PDF" onClick={() => setMenuOpen(false)}><Icon name="download" size={16} /><span>Résumé</span></a>
         <button type="button" ref={menuToggle} className="mobile-menu-toggle" aria-controls="mobile-nav" aria-expanded={menuOpen} aria-label={menuOpen ? 'Close navigation' : 'Open navigation'} onClick={() => setMenuOpen(!menuOpen)}><Icon name={menuOpen ? 'close' : 'menu'} /></button>
@@ -121,12 +162,7 @@ function App() {
       <section id="work" className="section work-section container" aria-labelledby="work-title">
         <SectionHeading id="work-title" number="02" eyebrow="SELECTED OPEN SOURCE" title="Selected engineering."><p>A selection of systems and tools I’ve built. The source is the most useful place to understand the work.</p></SectionHeading>
         <div className="work-toolbar"><div className="filter-list" aria-label="Filter engineering projects">{filters.map(item => <button key={item} type="button" onClick={() => setFilter(item)} className={filter === item ? 'filter-button is-active' : 'filter-button'} aria-pressed={filter === item}>{item}</button>)}</div><span className="work-count mono" aria-live="polite">{String(visibleProjects.length).padStart(2, '0')} projects</span></div>
-        <div className="projects-list">{visibleProjects.map(project => <article className={`project ${project.id === 'trainscale' ? 'project-featured' : ''}`} key={project.id}>
-          <div className="project-number mono">{String(projects.indexOf(project) + 1).padStart(2, '0')} /</div>
-          <div className="project-content"><div className="project-meta"><span className="micro">{project.kind}</span><span className="project-status">{project.status}</span></div><h3>{project.name}</h3><p className="project-summary">{project.summary}</p><div className="tags">{project.stack.map(item => <span key={item}>{item}</span>)}</div><details className="project-details"><summary>Inside the implementation <Icon name="plus" size={15} /></summary><ul>{project.details.map(detail => <li key={detail}>{detail}</li>)}</ul>{project.sourceUrl && <ExternalLink href={project.sourceUrl} className="inline-link">Explore the implementation <Icon name="arrowUp" size={14} /></ExternalLink>}</details></div>
-          <ExternalLink href={project.url} className="project-repo" label={`View ${project.name} on GitHub`}><Icon name="github" size={22} /><Icon name="arrowUp" size={17} /></ExternalLink>
-          {project.id === 'trainscale' && <div className="project-architecture" aria-label="TrainScale workflow"><span className="micro">A REPRODUCIBLE TRAINING PATH</span>{['Data & packing', 'Objectives & adapters', 'Distributed execution', 'Evaluate & checkpoint'].map((item, i) => <div className="training-step" key={item}><span className="mono">0{i + 1}</span>{item}{i < 3 && <span className="training-connector" aria-hidden="true" />}</div>)}</div>}
-        </article>)}</div>
+        <div className="projects-list">{visibleProjects.map(project => <ProjectCase project={project} number={projects.indexOf(project) + 1} key={project.id} />)}</div>
       </section>
 
       <section id="writing" className="section writing-section" aria-labelledby="writing-title">
@@ -134,7 +170,7 @@ function App() {
           <ResearchFeature />
           <div className="books-grid">{books.map((book, index) => <article className={`book-card book-${index + 1}`} key={book.id}>
             <ExternalLink href={book.url} className="book-cover" label={`Read ${book.title}`}><span className="book-cover-top"><span className="micro">NEURAL ATLAS</span><span className="mono">0{index + 1} / 03</span></span><span className="book-cover-title">{book.title}</span><span className={`book-cover-art cover-art-${index + 1}`} aria-hidden="true">{Array.from({ length: 5 }, (_, i) => <span key={i} />)}</span><span className="book-cover-bottom"><span>Hemanth Kandimalla</span><Icon name="arrowUp" size={20} /></span></ExternalLink>
-            <div className="book-info"><span className="writing-status"><span />{book.status}</span><p>{book.description}</p><ExternalLink href={book.url} className="inline-link">Read online <Icon name="arrowUp" size={15} /></ExternalLink></div>
+            <div className="book-info"><span className="writing-kind">{book.kind}</span><span className="writing-status"><span />{book.status}</span><p>{book.description}</p><ExternalLink href={book.url} className="inline-link">Read online <Icon name="arrowUp" size={15} /></ExternalLink></div>
           </article>)}</div>
           <article className="journal-feature"><div className="journal-marker" aria-hidden="true">N<span>↗</span></div><div><span className="micro">THE ENGINEERING JOURNAL / ONGOING</span><h3>{journal.title}</h3><p>{journal.description}</p></div><ExternalLink href={journal.url} className="button button-outline">Explore the journal <Icon name="arrowUp" size={17} /></ExternalLink></article>
         </div>
@@ -147,7 +183,7 @@ function App() {
         </div>
       </section>
 
-      <section className="practice-section container" aria-labelledby="practice-title"><div className="practice-intro"><span className="micro">METHODS & TOOLS</span><h2 id="practice-title">Engineering capabilities.</h2><p>Selected methods and tools used across my engineering work and research.</p></div><ExpertisePanel /></section>
+      <section className="practice-section container" aria-labelledby="practice-title"><div className="practice-intro"><span className="micro">PRACTICE & PUBLIC EVIDENCE</span><h2 id="practice-title">How I work.</h2><p>Agent control, context and memory, model systems, and developer tooling, connected to specific code, contracts, and research synthesis.</p></div><ExpertisePanel /></section>
 
       <section id="contact" className="contact-section" aria-labelledby="contact-title"><div className="container"><div className="contact-main"><div className="contact-intro"><span className="micro">ROLES · RESEARCH · PROJECTS</span><h2 id="contact-title">Contact<br /><em>Hemanth.</em></h2><ContactPortrait /></div><div className="contact-content"><p>For applied AI roles, research collaborations, and AI engineering projects.</p><a className="contact-email" href={`mailto:${profile.email}`}>{profile.email}<Icon name="arrowUp" size={21} /></a><button type="button" onClick={copyEmail} className="copy-email"><Icon name={copied ? 'check' : 'copy'} size={16} /><span aria-live="polite">{copied ? 'Email copied' : 'Copy email address'}</span></button></div></div><div className="contact-bottom"><span>{profile.location}</span><div className="social-links"><ExternalLink href={profile.linkedin}><Icon name="linkedin" size={17} />LinkedIn</ExternalLink>{profile.github.map(account => <ExternalLink key={account.name} href={account.url}><Icon name="github" size={17} />{account.name}</ExternalLink>)}</div></div></div></section>
     </main>
